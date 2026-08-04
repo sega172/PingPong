@@ -9,8 +9,8 @@ public class Paddle : MonoBehaviour
     private Rigidbody rb;
     private bool moving;
     private bool isInit;
+    private bool isBot;
     private InputAction action;
-
 
     private void FixedUpdate()
     {
@@ -22,19 +22,25 @@ public class Paddle : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(isInit == false) return;
+        if (isInit == false) return;
 
-        action.performed -= StartMoving;
-        action.canceled -= StopMoving;
+        if (!isBot)
+        {
+            action.performed -= StartMoving;
+            action.canceled -= StopMoving;
+        }
     }
 
     public void Init(Team team, bool isBot, InputAction inputAction)
     {
         rb = GetComponent<Rigidbody>();
         action = inputAction;
-
-        action.performed += StartMoving;
-        action.canceled += StopMoving;
+        this.isBot = isBot;
+        if (!isBot)
+        {
+            action.performed += StartMoving;
+            action.canceled += StopMoving;
+        }
 
         isInit = true;
     }

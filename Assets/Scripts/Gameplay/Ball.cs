@@ -12,11 +12,17 @@ public class Ball : MonoBehaviour
     public void Init()
     {
         rb = GetComponent<Rigidbody>();
-        rb.linearVelocity = direction * _speed;
     }
 
     private void FixedUpdate()
     {
-        
+        rb.linearVelocity = direction * _speed;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        print("Collide" + collision.gameObject.name);
+        if(collision.gameObject.TryGetComponent(out BallDirectionChanger dirChanger))
+            direction = dirChanger.GetNewDirection(direction);
     }
 }
