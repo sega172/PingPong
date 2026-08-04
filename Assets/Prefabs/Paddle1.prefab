@@ -227,6 +227,8 @@ MonoBehaviour:
   _speed: 5
   direction: {x: 0, y: 0, z: 0}
   model: {fileID: 6394550474905037449}
+  yMin: -4.02
+  yMax: 4.12
 --- !u!114 &522170933693598218
 MonoBehaviour:
   m_ObjectHideFlags: 0

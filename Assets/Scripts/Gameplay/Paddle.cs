@@ -8,6 +8,9 @@ public class Paddle : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private Vector3 direction;
     [SerializeField] Transform model;
+
+    [SerializeField] private float yMin, yMax;
+
     private Vector3 modelScale;
     private Rigidbody rb;
     private bool moving;
@@ -66,6 +69,7 @@ public class Paddle : MonoBehaviour
         if (!moving) return;
 
         rb.position += direction * _speed * Time.fixedDeltaTime;
+        rb.position = new Vector3(rb.position.x, Mathf.Clamp(rb.position.y, yMin, yMax), 0);
     }
 
     public void HitAnimation()
