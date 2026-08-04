@@ -9,13 +9,8 @@ public class Paddle : MonoBehaviour
     private Rigidbody rb;
     private bool moving;
     private bool isInit;
+    private InputAction action;
 
-    //mock
-    [SerializeField] Team team;
-    [SerializeField] private bool bot;
-
-
-    private void Awake() => Init(team, bot);
 
     private void FixedUpdate()
     {
@@ -25,9 +20,21 @@ public class Paddle : MonoBehaviour
         TryMove();
     }
 
-    public void Init(Team team, bool isBot)
+    private void OnDestroy()
+    {
+        if(isInit == false) return;
+
+        action.performed -= StartMoving;
+        action.canceled -= StopMoving;
+    }
+
+    public void Init(Team team, bool isBot, InputAction inputAction)
     {
         rb = GetComponent<Rigidbody>();
+        action = inputAction;
+
+        action.performed += StartMoving;
+        action.canceled += StopMoving;
 
         isInit = true;
     }

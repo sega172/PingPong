@@ -605,13 +605,31 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Player1"",
-            ""id"": ""67c9ea88-e53f-4c14-9de2-f6da6d89eb2f"",
+            ""name"": ""Player"",
+            ""id"": ""2512b69e-0878-44d6-babf-f6521ba13f39"",
             ""actions"": [
                 {
-                    ""name"": ""Vertical"",
+                    ""name"": ""Player1"",
                     ""type"": ""Value"",
-                    ""id"": ""343e38ef-e507-43eb-b28d-15abb8e14c43"",
+                    ""id"": ""2269a0ae-a00e-4b8d-83b3-b051a41b2189"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Player2"",
+                    ""type"": ""Value"",
+                    ""id"": ""b1a45ea3-f88b-4550-8b29-61d9b4cc0d8d"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PlayerBoth"",
+                    ""type"": ""Value"",
+                    ""id"": ""c9d9c750-3e92-4358-b716-ded5efda327d"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -621,167 +639,133 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": ""KeyboardWS"",
-                    ""id"": ""431f3816-d7ae-4fd3-9d38-1e99f0563531"",
+                    ""id"": ""d32fd913-bb64-4027-b09a-f87efb08d5e3"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Vertical"",
+                    ""action"": ""Player1"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""Negative"",
-                    ""id"": ""d6d5af38-fd9e-45d9-87ae-bed618f855b7"",
+                    ""id"": ""e87951ec-eb07-4307-8b55-8d0ff9d74ba8"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Vertical"",
+                    ""action"": ""Player1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""Positive"",
-                    ""id"": ""66516f6f-2d9e-459a-a95d-fd1bd0fecb6f"",
+                    ""id"": ""c37fb797-759b-4490-8da8-09f567718099"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Vertical"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                }
-            ]
-        },
-        {
-            ""name"": ""Player2"",
-            ""id"": ""93dac94c-5f01-4e54-9542-c990d19296f8"",
-            ""actions"": [
-                {
-                    ""name"": ""Vertical"",
-                    ""type"": ""Value"",
-                    ""id"": ""8a716b32-b186-433c-8206-336e378a84a6"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": ""KeyboardUpDown"",
-                    ""id"": ""01473545-2509-4616-a302-6d176d255fa0"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Vertical"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""Negative"",
-                    ""id"": ""a64206d2-cc0b-49ba-bc2b-0b4b6291196b"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Vertical"",
+                    ""action"": ""Player1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
-                {
-                    ""name"": ""Positive"",
-                    ""id"": ""b747d95d-f41d-4749-b883-be3ca7757707"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Vertical"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                }
-            ]
-        },
-        {
-            ""name"": ""PlayerBoth"",
-            ""id"": ""4e21763b-5f51-4773-9a58-13c866ee83ed"",
-            ""actions"": [
-                {
-                    ""name"": ""Vertical"",
-                    ""type"": ""Value"",
-                    ""id"": ""85100a36-1da3-47c4-8993-cd0734b93bee"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                }
-            ],
-            ""bindings"": [
                 {
                     ""name"": ""KeyboardWS"",
-                    ""id"": ""8ecb85f9-aaaf-4e45-8cd4-dcf198c9c6bb"",
+                    ""id"": ""3823fad7-1eb7-4469-bf9e-ead5edcbddd5"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Vertical"",
+                    ""action"": ""PlayerBoth"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""Negative"",
-                    ""id"": ""85f50aa6-e51e-4db7-b791-375480fd4b6f"",
+                    ""id"": ""13457928-325d-42d3-8f51-ef4204618443"",
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Vertical"",
+                    ""action"": ""PlayerBoth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""Positive"",
-                    ""id"": ""d4010ca1-0beb-4372-bd7c-f86446e5bd68"",
+                    ""id"": ""71384491-022b-431b-94a9-4de3b5e5e302"",
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Vertical"",
+                    ""action"": ""PlayerBoth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""KeyboardUpDown"",
-                    ""id"": ""d7c69a99-c3fb-4796-bba0-65fac5391877"",
+                    ""id"": ""94423c50-edc0-4094-99b9-143e0b126f34"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Vertical"",
+                    ""action"": ""PlayerBoth"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""Negative"",
-                    ""id"": ""6049c556-7e7b-4a5d-a6de-f76bbe934e56"",
+                    ""id"": ""da67f77e-ae77-49c8-9fab-3ad1d14c65fb"",
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Vertical"",
+                    ""action"": ""PlayerBoth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""Positive"",
-                    ""id"": ""ff7d681b-d766-4048-a65a-4d03386cac37"",
+                    ""id"": ""a1f35527-7cb8-44e3-bbad-b6fc45cc438b"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Vertical"",
+                    ""action"": ""PlayerBoth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""KeyboardUpDown"",
+                    ""id"": ""90a81377-ec99-4ef1-8609-b4643c0b3cad"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Player2"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""5ad35bbc-9b6b-4987-a7fd-066e700f9fd8"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Player2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""9f5f0ef3-0648-4a2f-b128-403312de9296"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Player2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -863,23 +847,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
-        // Player1
-        m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
-        m_Player1_Vertical = m_Player1.FindAction("Vertical", throwIfNotFound: true);
-        // Player2
-        m_Player2 = asset.FindActionMap("Player2", throwIfNotFound: true);
-        m_Player2_Vertical = m_Player2.FindAction("Vertical", throwIfNotFound: true);
-        // PlayerBoth
-        m_PlayerBoth = asset.FindActionMap("PlayerBoth", throwIfNotFound: true);
-        m_PlayerBoth_Vertical = m_PlayerBoth.FindAction("Vertical", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Player1 = m_Player.FindAction("Player1", throwIfNotFound: true);
+        m_Player_Player2 = m_Player.FindAction("Player2", throwIfNotFound: true);
+        m_Player_PlayerBoth = m_Player.FindAction("PlayerBoth", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
     {
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_Player1.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player1.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_Player2.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player2.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_PlayerBoth.enabled, "This will cause a leak and performance issues, InputSystem_Actions.PlayerBoth.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player.Disable() has not been called.");
     }
 
     /// <summary>
@@ -1147,29 +1125,39 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     /// </summary>
     public UIActions @UI => new UIActions(this);
 
-    // Player1
-    private readonly InputActionMap m_Player1;
-    private List<IPlayer1Actions> m_Player1ActionsCallbackInterfaces = new List<IPlayer1Actions>();
-    private readonly InputAction m_Player1_Vertical;
+    // Player
+    private readonly InputActionMap m_Player;
+    private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
+    private readonly InputAction m_Player_Player1;
+    private readonly InputAction m_Player_Player2;
+    private readonly InputAction m_Player_PlayerBoth;
     /// <summary>
-    /// Provides access to input actions defined in input action map "Player1".
+    /// Provides access to input actions defined in input action map "Player".
     /// </summary>
-    public struct Player1Actions
+    public struct PlayerActions
     {
         private @InputSystem_Actions m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public Player1Actions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+        public PlayerActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Player1/Vertical".
+        /// Provides access to the underlying input action "Player/Player1".
         /// </summary>
-        public InputAction @Vertical => m_Wrapper.m_Player1_Vertical;
+        public InputAction @Player1 => m_Wrapper.m_Player_Player1;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Player2".
+        /// </summary>
+        public InputAction @Player2 => m_Wrapper.m_Player_Player2;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/PlayerBoth".
+        /// </summary>
+        public InputAction @PlayerBoth => m_Wrapper.m_Player_PlayerBoth;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_Player1; }
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -1177,9 +1165,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="Player1Actions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="PlayerActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(Player1Actions set) { return set.Get(); }
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -1187,14 +1175,20 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="Player1Actions" />
-        public void AddCallbacks(IPlayer1Actions instance)
+        /// <seealso cref="PlayerActions" />
+        public void AddCallbacks(IPlayerActions instance)
         {
-            if (instance == null || m_Wrapper.m_Player1ActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_Player1ActionsCallbackInterfaces.Add(instance);
-            @Vertical.started += instance.OnVertical;
-            @Vertical.performed += instance.OnVertical;
-            @Vertical.canceled += instance.OnVertical;
+            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
+            @Player1.started += instance.OnPlayer1;
+            @Player1.performed += instance.OnPlayer1;
+            @Player1.canceled += instance.OnPlayer1;
+            @Player2.started += instance.OnPlayer2;
+            @Player2.performed += instance.OnPlayer2;
+            @Player2.canceled += instance.OnPlayer2;
+            @PlayerBoth.started += instance.OnPlayerBoth;
+            @PlayerBoth.performed += instance.OnPlayerBoth;
+            @PlayerBoth.canceled += instance.OnPlayerBoth;
         }
 
         /// <summary>
@@ -1203,21 +1197,27 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="Player1Actions" />
-        private void UnregisterCallbacks(IPlayer1Actions instance)
+        /// <seealso cref="PlayerActions" />
+        private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @Vertical.started -= instance.OnVertical;
-            @Vertical.performed -= instance.OnVertical;
-            @Vertical.canceled -= instance.OnVertical;
+            @Player1.started -= instance.OnPlayer1;
+            @Player1.performed -= instance.OnPlayer1;
+            @Player1.canceled -= instance.OnPlayer1;
+            @Player2.started -= instance.OnPlayer2;
+            @Player2.performed -= instance.OnPlayer2;
+            @Player2.canceled -= instance.OnPlayer2;
+            @PlayerBoth.started -= instance.OnPlayerBoth;
+            @PlayerBoth.performed -= instance.OnPlayerBoth;
+            @PlayerBoth.canceled -= instance.OnPlayerBoth;
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="Player1Actions.UnregisterCallbacks(IPlayer1Actions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />.
         /// </summary>
-        /// <seealso cref="Player1Actions.UnregisterCallbacks(IPlayer1Actions)" />
-        public void RemoveCallbacks(IPlayer1Actions instance)
+        /// <seealso cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />
+        public void RemoveCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_Player1ActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -1227,213 +1227,21 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="Player1Actions.AddCallbacks(IPlayer1Actions)" />
-        /// <seealso cref="Player1Actions.RemoveCallbacks(IPlayer1Actions)" />
-        /// <seealso cref="Player1Actions.UnregisterCallbacks(IPlayer1Actions)" />
-        public void SetCallbacks(IPlayer1Actions instance)
+        /// <seealso cref="PlayerActions.AddCallbacks(IPlayerActions)" />
+        /// <seealso cref="PlayerActions.RemoveCallbacks(IPlayerActions)" />
+        /// <seealso cref="PlayerActions.UnregisterCallbacks(IPlayerActions)" />
+        public void SetCallbacks(IPlayerActions instance)
         {
-            foreach (var item in m_Wrapper.m_Player1ActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_Player1ActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="Player1Actions" /> instance referencing this action map.
+    /// Provides a new <see cref="PlayerActions" /> instance referencing this action map.
     /// </summary>
-    public Player1Actions @Player1 => new Player1Actions(this);
-
-    // Player2
-    private readonly InputActionMap m_Player2;
-    private List<IPlayer2Actions> m_Player2ActionsCallbackInterfaces = new List<IPlayer2Actions>();
-    private readonly InputAction m_Player2_Vertical;
-    /// <summary>
-    /// Provides access to input actions defined in input action map "Player2".
-    /// </summary>
-    public struct Player2Actions
-    {
-        private @InputSystem_Actions m_Wrapper;
-
-        /// <summary>
-        /// Construct a new instance of the input action map wrapper class.
-        /// </summary>
-        public Player2Actions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
-        /// <summary>
-        /// Provides access to the underlying input action "Player2/Vertical".
-        /// </summary>
-        public InputAction @Vertical => m_Wrapper.m_Player2_Vertical;
-        /// <summary>
-        /// Provides access to the underlying input action map instance.
-        /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_Player2; }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
-        public void Enable() { Get().Enable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
-        public void Disable() { Get().Disable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
-        public bool enabled => Get().enabled;
-        /// <summary>
-        /// Implicitly converts an <see ref="Player2Actions" /> to an <see ref="InputActionMap" /> instance.
-        /// </summary>
-        public static implicit operator InputActionMap(Player2Actions set) { return set.Get(); }
-        /// <summary>
-        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <param name="instance">Callback instance.</param>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
-        /// </remarks>
-        /// <seealso cref="Player2Actions" />
-        public void AddCallbacks(IPlayer2Actions instance)
-        {
-            if (instance == null || m_Wrapper.m_Player2ActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_Player2ActionsCallbackInterfaces.Add(instance);
-            @Vertical.started += instance.OnVertical;
-            @Vertical.performed += instance.OnVertical;
-            @Vertical.canceled += instance.OnVertical;
-        }
-
-        /// <summary>
-        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <remarks>
-        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
-        /// </remarks>
-        /// <seealso cref="Player2Actions" />
-        private void UnregisterCallbacks(IPlayer2Actions instance)
-        {
-            @Vertical.started -= instance.OnVertical;
-            @Vertical.performed -= instance.OnVertical;
-            @Vertical.canceled -= instance.OnVertical;
-        }
-
-        /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="Player2Actions.UnregisterCallbacks(IPlayer2Actions)" />.
-        /// </summary>
-        /// <seealso cref="Player2Actions.UnregisterCallbacks(IPlayer2Actions)" />
-        public void RemoveCallbacks(IPlayer2Actions instance)
-        {
-            if (m_Wrapper.m_Player2ActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        /// <summary>
-        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
-        /// </summary>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
-        /// </remarks>
-        /// <seealso cref="Player2Actions.AddCallbacks(IPlayer2Actions)" />
-        /// <seealso cref="Player2Actions.RemoveCallbacks(IPlayer2Actions)" />
-        /// <seealso cref="Player2Actions.UnregisterCallbacks(IPlayer2Actions)" />
-        public void SetCallbacks(IPlayer2Actions instance)
-        {
-            foreach (var item in m_Wrapper.m_Player2ActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_Player2ActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    /// <summary>
-    /// Provides a new <see cref="Player2Actions" /> instance referencing this action map.
-    /// </summary>
-    public Player2Actions @Player2 => new Player2Actions(this);
-
-    // PlayerBoth
-    private readonly InputActionMap m_PlayerBoth;
-    private List<IPlayerBothActions> m_PlayerBothActionsCallbackInterfaces = new List<IPlayerBothActions>();
-    private readonly InputAction m_PlayerBoth_Vertical;
-    /// <summary>
-    /// Provides access to input actions defined in input action map "PlayerBoth".
-    /// </summary>
-    public struct PlayerBothActions
-    {
-        private @InputSystem_Actions m_Wrapper;
-
-        /// <summary>
-        /// Construct a new instance of the input action map wrapper class.
-        /// </summary>
-        public PlayerBothActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
-        /// <summary>
-        /// Provides access to the underlying input action "PlayerBoth/Vertical".
-        /// </summary>
-        public InputAction @Vertical => m_Wrapper.m_PlayerBoth_Vertical;
-        /// <summary>
-        /// Provides access to the underlying input action map instance.
-        /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_PlayerBoth; }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
-        public void Enable() { Get().Enable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
-        public void Disable() { Get().Disable(); }
-        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
-        public bool enabled => Get().enabled;
-        /// <summary>
-        /// Implicitly converts an <see ref="PlayerBothActions" /> to an <see ref="InputActionMap" /> instance.
-        /// </summary>
-        public static implicit operator InputActionMap(PlayerBothActions set) { return set.Get(); }
-        /// <summary>
-        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <param name="instance">Callback instance.</param>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
-        /// </remarks>
-        /// <seealso cref="PlayerBothActions" />
-        public void AddCallbacks(IPlayerBothActions instance)
-        {
-            if (instance == null || m_Wrapper.m_PlayerBothActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_PlayerBothActionsCallbackInterfaces.Add(instance);
-            @Vertical.started += instance.OnVertical;
-            @Vertical.performed += instance.OnVertical;
-            @Vertical.canceled += instance.OnVertical;
-        }
-
-        /// <summary>
-        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
-        /// </summary>
-        /// <remarks>
-        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
-        /// </remarks>
-        /// <seealso cref="PlayerBothActions" />
-        private void UnregisterCallbacks(IPlayerBothActions instance)
-        {
-            @Vertical.started -= instance.OnVertical;
-            @Vertical.performed -= instance.OnVertical;
-            @Vertical.canceled -= instance.OnVertical;
-        }
-
-        /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="PlayerBothActions.UnregisterCallbacks(IPlayerBothActions)" />.
-        /// </summary>
-        /// <seealso cref="PlayerBothActions.UnregisterCallbacks(IPlayerBothActions)" />
-        public void RemoveCallbacks(IPlayerBothActions instance)
-        {
-            if (m_Wrapper.m_PlayerBothActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
-
-        /// <summary>
-        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
-        /// </summary>
-        /// <remarks>
-        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
-        /// </remarks>
-        /// <seealso cref="PlayerBothActions.AddCallbacks(IPlayerBothActions)" />
-        /// <seealso cref="PlayerBothActions.RemoveCallbacks(IPlayerBothActions)" />
-        /// <seealso cref="PlayerBothActions.UnregisterCallbacks(IPlayerBothActions)" />
-        public void SetCallbacks(IPlayerBothActions instance)
-        {
-            foreach (var item in m_Wrapper.m_PlayerBothActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_PlayerBothActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
-        }
-    }
-    /// <summary>
-    /// Provides a new <see cref="PlayerBothActions" /> instance referencing this action map.
-    /// </summary>
-    public PlayerBothActions @PlayerBoth => new PlayerBothActions(this);
+    public PlayerActions @Player => new PlayerActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -1578,48 +1386,32 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player1" which allows adding and removing callbacks.
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
     /// </summary>
-    /// <seealso cref="Player1Actions.AddCallbacks(IPlayer1Actions)" />
-    /// <seealso cref="Player1Actions.RemoveCallbacks(IPlayer1Actions)" />
-    public interface IPlayer1Actions
+    /// <seealso cref="PlayerActions.AddCallbacks(IPlayerActions)" />
+    /// <seealso cref="PlayerActions.RemoveCallbacks(IPlayerActions)" />
+    public interface IPlayerActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Vertical" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Player1" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnVertical(InputAction.CallbackContext context);
-    }
-    /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player2" which allows adding and removing callbacks.
-    /// </summary>
-    /// <seealso cref="Player2Actions.AddCallbacks(IPlayer2Actions)" />
-    /// <seealso cref="Player2Actions.RemoveCallbacks(IPlayer2Actions)" />
-    public interface IPlayer2Actions
-    {
+        void OnPlayer1(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Vertical" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Player2" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnVertical(InputAction.CallbackContext context);
-    }
-    /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "PlayerBoth" which allows adding and removing callbacks.
-    /// </summary>
-    /// <seealso cref="PlayerBothActions.AddCallbacks(IPlayerBothActions)" />
-    /// <seealso cref="PlayerBothActions.RemoveCallbacks(IPlayerBothActions)" />
-    public interface IPlayerBothActions
-    {
+        void OnPlayer2(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Vertical" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "PlayerBoth" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnVertical(InputAction.CallbackContext context);
+        void OnPlayerBoth(InputAction.CallbackContext context);
     }
 }

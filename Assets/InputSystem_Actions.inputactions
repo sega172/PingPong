@@ -519,13 +519,31 @@
             ]
         },
         {
-            "name": "Player1",
-            "id": "67c9ea88-e53f-4c14-9de2-f6da6d89eb2f",
+            "name": "Player",
+            "id": "2512b69e-0878-44d6-babf-f6521ba13f39",
             "actions": [
                 {
-                    "name": "Vertical",
+                    "name": "Player1",
                     "type": "Value",
-                    "id": "343e38ef-e507-43eb-b28d-15abb8e14c43",
+                    "id": "2269a0ae-a00e-4b8d-83b3-b051a41b2189",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Player2",
+                    "type": "Value",
+                    "id": "b1a45ea3-f88b-4550-8b29-61d9b4cc0d8d",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "PlayerBoth",
+                    "type": "Value",
+                    "id": "c9d9c750-3e92-4358-b716-ded5efda327d",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
@@ -535,167 +553,133 @@
             "bindings": [
                 {
                     "name": "KeyboardWS",
-                    "id": "431f3816-d7ae-4fd3-9d38-1e99f0563531",
+                    "id": "d32fd913-bb64-4027-b09a-f87efb08d5e3",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Vertical",
+                    "action": "Player1",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "Negative",
-                    "id": "d6d5af38-fd9e-45d9-87ae-bed618f855b7",
+                    "id": "e87951ec-eb07-4307-8b55-8d0ff9d74ba8",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Vertical",
+                    "action": "Player1",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "Positive",
-                    "id": "66516f6f-2d9e-459a-a95d-fd1bd0fecb6f",
+                    "id": "c37fb797-759b-4490-8da8-09f567718099",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Vertical",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "Player2",
-            "id": "93dac94c-5f01-4e54-9542-c990d19296f8",
-            "actions": [
-                {
-                    "name": "Vertical",
-                    "type": "Value",
-                    "id": "8a716b32-b186-433c-8206-336e378a84a6",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "KeyboardUpDown",
-                    "id": "01473545-2509-4616-a302-6d176d255fa0",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Vertical",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "Negative",
-                    "id": "a64206d2-cc0b-49ba-bc2b-0b4b6291196b",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Vertical",
+                    "action": "Player1",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
-                {
-                    "name": "Positive",
-                    "id": "b747d95d-f41d-4749-b883-be3ca7757707",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Vertical",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "PlayerBoth",
-            "id": "4e21763b-5f51-4773-9a58-13c866ee83ed",
-            "actions": [
-                {
-                    "name": "Vertical",
-                    "type": "Value",
-                    "id": "85100a36-1da3-47c4-8993-cd0734b93bee",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
                 {
                     "name": "KeyboardWS",
-                    "id": "8ecb85f9-aaaf-4e45-8cd4-dcf198c9c6bb",
+                    "id": "3823fad7-1eb7-4469-bf9e-ead5edcbddd5",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Vertical",
+                    "action": "PlayerBoth",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "Negative",
-                    "id": "85f50aa6-e51e-4db7-b791-375480fd4b6f",
+                    "id": "13457928-325d-42d3-8f51-ef4204618443",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Vertical",
+                    "action": "PlayerBoth",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "Positive",
-                    "id": "d4010ca1-0beb-4372-bd7c-f86446e5bd68",
+                    "id": "71384491-022b-431b-94a9-4de3b5e5e302",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Vertical",
+                    "action": "PlayerBoth",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "KeyboardUpDown",
-                    "id": "d7c69a99-c3fb-4796-bba0-65fac5391877",
+                    "id": "94423c50-edc0-4094-99b9-143e0b126f34",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Vertical",
+                    "action": "PlayerBoth",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "Negative",
-                    "id": "6049c556-7e7b-4a5d-a6de-f76bbe934e56",
+                    "id": "da67f77e-ae77-49c8-9fab-3ad1d14c65fb",
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Vertical",
+                    "action": "PlayerBoth",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
                     "name": "Positive",
-                    "id": "ff7d681b-d766-4048-a65a-4d03386cac37",
+                    "id": "a1f35527-7cb8-44e3-bbad-b6fc45cc438b",
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Vertical",
+                    "action": "PlayerBoth",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "KeyboardUpDown",
+                    "id": "90a81377-ec99-4ef1-8609-b4643c0b3cad",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Player2",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Negative",
+                    "id": "5ad35bbc-9b6b-4987-a7fd-066e700f9fd8",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Player2",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Positive",
+                    "id": "9f5f0ef3-0648-4a2f-b128-403312de9296",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Player2",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }
