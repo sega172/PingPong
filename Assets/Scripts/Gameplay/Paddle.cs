@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -6,11 +7,14 @@ public class Paddle : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private Vector3 direction;
+    [SerializeField] Transform model;
+    private Vector3 modelScale;
     private Rigidbody rb;
     private bool moving;
     private bool isInit;
     private bool isBot;
     private InputAction action;
+
 
     private void FixedUpdate()
     {
@@ -41,7 +45,7 @@ public class Paddle : MonoBehaviour
             action.performed += StartMoving;
             action.canceled += StopMoving;
         }
-
+        modelScale = model.transform.localScale;
         isInit = true;
     }
 
@@ -62,5 +66,14 @@ public class Paddle : MonoBehaviour
         if (!moving) return;
 
         rb.position += direction * _speed * Time.fixedDeltaTime;
+    }
+
+    public void HitAnimation()
+    {
+        var seq = DOTween.Sequence();
+
+        seq.Append(model.DOScale(modelScale * 0.95f, 0.05f));
+        seq.Append(model.DOScale(modelScale, 0.2f).SetEase(Ease.OutBack));
+
     }
 }
