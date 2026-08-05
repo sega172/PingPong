@@ -9,9 +9,11 @@ public class Goal : MonoBehaviour
     {
         if(other.gameObject.TryGetComponent(out Ball ball))
         {
-            ScoreManager.AddPoint(team);
-            print($"—чет {ScoreManager.Score1} : {ScoreManager.Score2}");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Team winner = team == Team.Player1 ? Team.Player2 : Team.Player1;
+            ScoreManager.AddPoint(winner);
+            ball.HitParticles(ball.transform.position);
+            ball.Disable();
+            GameManager.Instance.Restart();
         }
     }
 }
