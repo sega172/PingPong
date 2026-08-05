@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Ball : MonoBehaviour
@@ -24,9 +23,6 @@ public class Ball : MonoBehaviour
     private void FixedUpdate()
     {
         rb.linearVelocity = direction * _speed;
-
-        if(Mathf.Abs( rb.position.x)>15)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnCollisionEnter(Collision collision)

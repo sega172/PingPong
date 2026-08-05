@@ -5,7 +5,7 @@ public static class ScoreManager
     public static event Action<int, int> ScorePvpChanged;
     public static event Action<int> ScorePveChanged;
 
-    private static GameMode _gameMode;
+    private static GameMode _gameMode = GameMode.PvP;
 
     public static int Score1 { get; private set; }
     public static int Score2 { get; private set; }
