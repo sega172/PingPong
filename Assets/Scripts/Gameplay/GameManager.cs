@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioClip backCountClip;
     [SerializeField] AudioClip startClip;
 
+    [SerializeField] AudioSource music;
+
     private void Awake()
     {
         Instance = this;
@@ -33,6 +35,8 @@ public class GameManager : MonoBehaviour
         player1 = InputSystem.actions.FindAction("Player1");
         player2 = InputSystem.actions.FindAction("Player2");
         playerBoth = InputSystem.actions.FindAction("PlayerBoth");
+        music.Play();
+        music.volume = 0;
 
         StartGame();
     }
@@ -41,6 +45,12 @@ public class GameManager : MonoBehaviour
     {
         InitializePaddles();
         Restart();
+    }
+
+    void Music(bool enable, float duration)
+    {
+        float volume = enable ? 0.5f : 0;
+        music.DOFade(volume, duration);
     }
 
     private void InitializePaddles()
@@ -68,6 +78,7 @@ public class GameManager : MonoBehaviour
     {
         ball.Disable();
         DisableInputs();
+        Music(false, 1);
 
         float ballScale = ball.transform.localScale.x;
         ball.transform.localScale = Vector3.zero;
@@ -87,7 +98,8 @@ public class GameManager : MonoBehaviour
         {
             EnableInputs();
             ball.Enable();
-            source.PlayOneShot(startClip);
+            
+            
         });
 
         seq.PlayForward();
@@ -99,22 +111,26 @@ public class GameManager : MonoBehaviour
 
         backCountLabel.transform.localScale = Vector3.zero;
 
+        float step = 0.3f;
+
         seq.AppendCallback(() => backCountLabel.text = "3...");
         seq.AppendCallback(() => source.PlayOneShot(backCountClip));
-        seq.Append(backCountLabel.transform.DOScale(1, 0.4f).SetEase(Ease.OutBack));
-        seq.Append(backCountLabel.transform.DOScale(0, 0.4f).SetEase(Ease.InBack));
+        seq.Append(backCountLabel.transform.DOScale(1, step).SetEase(Ease.OutBack));
+        seq.Append(backCountLabel.transform.DOScale(0, step).SetEase(Ease.InBack));
 
         seq.AppendCallback(() => backCountLabel.text = "2...");
         seq.AppendCallback(() => source.PlayOneShot(backCountClip));
-        seq.Append(backCountLabel.transform.DOScale(1, 0.4f).SetEase(Ease.OutBack));
-        seq.Append(backCountLabel.transform.DOScale(0, 0.4f).SetEase(Ease.InBack));
-
+        seq.Append(backCountLabel.transform.DOScale(1, step).SetEase(Ease.OutBack));
+        seq.Append(backCountLabel.transform.DOScale(0, step).SetEase(Ease.InBack));
+        
         seq.AppendCallback(() => backCountLabel.text = "1...");
         seq.AppendCallback(() => source.PlayOneShot(backCountClip));
-        seq.Append(backCountLabel.transform.DOScale(1, 0.4f).SetEase(Ease.OutBack));
-        seq.Append(backCountLabel.transform.DOScale(0, 0.4f).SetEase(Ease.InBack));
+        seq.Append(backCountLabel.transform.DOScale(1, step).SetEase(Ease.OutBack));
+        seq.Append(backCountLabel.transform.DOScale(0, step).SetEase(Ease.InBack));
 
         seq.AppendCallback(() => backCountLabel.text = "GO!");
+        seq.AppendCallback(() => Music(true, 0.5f));
+        seq.AppendCallback(() => source.PlayOneShot(startClip)); 
         seq.Append(backCountLabel.transform.DOScale(1, 0.6f).SetEase(Ease.OutBack));
         seq.Append(backCountLabel.transform.DOScale(0, 2f).SetEase(Ease.InBack));
 

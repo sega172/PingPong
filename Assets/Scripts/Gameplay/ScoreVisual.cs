@@ -14,7 +14,7 @@ public class ScoreVisual : MonoBehaviour
 
     private void ScoreChanged(int score1, int score2)
     {
-        label.text = $"<color=red>{score1}</color>\t<color=yellow>{score2}</color>";
+        label.text = $"<color=red>{score1}</color>\t<color=#00FFFF>{score2}</color>";
     }
 
     private void OnDestroy()

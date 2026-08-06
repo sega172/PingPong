@@ -58,11 +58,10 @@ public class Ball : MonoBehaviour
                 _speed += 0.3f;
                 _speed = Mathf.Min(_speed, _maxSpeed);
             }
+            HitAnimation();
+            HitParticles(collision.contacts[0].point);
+            HitSound();
         }
-
-        HitAnimation();
-        HitParticles(collision.contacts[0].point);
-        HitSound();
     }
 
     public void HitAnimation()
@@ -79,6 +78,10 @@ public class Ball : MonoBehaviour
         Active = true;
         rb.isKinematic = false;
         _speed = Mathf.Min(_speed, _maxInitialSpeed);
+
+        int x = Random.Range(0, 2) == 0 ? -1 : 1;
+        int y = Random.Range(0, 2) == 0 ? -1 : 1;
+        direction = new Vector2(x, y);
     }
     public void Disable()
     {
@@ -86,9 +89,10 @@ public class Ball : MonoBehaviour
         rb.isKinematic = true;
     }
 
-    public void HitParticles(Vector3 position)
+    public void HitParticles(Vector3 contactPoint)
     {
-        Instantiate(hitParticles, position, Quaternion.identity);
+        var direction = (transform.position - contactPoint).normalized;
+        Instantiate(hitParticles, contactPoint, Quaternion.LookRotation(direction));
     }
 
     public void HitSound()

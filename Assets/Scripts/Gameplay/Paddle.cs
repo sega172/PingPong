@@ -119,8 +119,12 @@ public class Paddle : MonoBehaviour
     {
         var seq = DOTween.Sequence();
 
-        seq.Append(model.DOScale(modelScale * 0.90f, 0.05f));
-        seq.Append(model.DOScale(modelScale, 0.2f).SetEase(Ease.OutBack));
+        //seq.Append(model.DOScale(modelScale * 0.90f, 0.05f));
+        seq.Append(model.DOLocalMoveX(-0.1f, 0.05f));
+
+        //seq.Append(model.DOScale(modelScale, 0.3f).SetEase(Ease.OutBack));
+        //seq.Append(model.DOLocalMoveX(0, 0.4f).SetEase(Ease.OutBack));
+        seq.Append(model.DOLocalMoveX(0, 1.3f).SetEase(Ease.OutElastic));
 
         source.pitch = Mathf.Lerp(1, 2, Ball.Instance.SpeedPercent);
         source.PlayOneShot(hitSound);
