@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd3720b31cc6ec489ceecc0b1716dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BallDirectionChanger
+  addSpeed: 0
   changeXMode: 0
   changeYMode: 2
 --- !u!65 &138272377
@@ -604,7 +605,10 @@ PrefabInstance:
     - {fileID: 3063736807912412124, guid: 2b77408f2e43a31488b122c97745ed6a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8544154041751108417, guid: 2b77408f2e43a31488b122c97745ed6a, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1040957095}
   m_SourcePrefab: {fileID: 100100000, guid: 2b77408f2e43a31488b122c97745ed6a, type: 3}
 --- !u!114 &863165950 stripped
 MonoBehaviour:
@@ -617,6 +621,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384b0f975c93d774eac717ffd869cf0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ball
+--- !u!1 &950701377 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8544154041751108417, guid: 2b77408f2e43a31488b122c97745ed6a, type: 3}
+  m_PrefabInstance: {fileID: 837436458}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &972133147
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,12 +771,99 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 437966591888540961, guid: 2b77408f2e43a31488b122c97745ed6a, type: 3}
   m_PrefabInstance: {fileID: 837436458}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 950701377}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d02c57c4f6108b4d92a5d4ebdb5fe2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Paddle
+--- !u!114 &1040957095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950701377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c4d158a76d7c5468517b62c9b991c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BotPaddle
+  _difficulty: 0.419
+  _reactionDelayCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.05
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _accuracyCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0.95
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _speedFactorCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _maxPredictionOffset: 0.8
+  _gain: 2.5
 --- !u!1 &1590619975
 GameObject:
   m_ObjectHideFlags: 0
@@ -1299,6 +1395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd3720b31cc6ec489ceecc0b1716dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BallDirectionChanger
+  addSpeed: 0
   changeXMode: 0
   changeYMode: 1
 --- !u!65 &2003793715

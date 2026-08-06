@@ -70,6 +70,12 @@ public class Paddle : MonoBehaviour
 
     }
 
+    public void SetDirection(float direction)
+    {
+        moving = Mathf.Abs(direction) > 0.01f;
+        targetDirection = Mathf.Clamp(direction, -1f, 1f);
+    }
+
     public void StartMoving(InputAction.CallbackContext ctx)
     {
         moving = true;
