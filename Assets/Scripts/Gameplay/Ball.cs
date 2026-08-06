@@ -4,11 +4,23 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Ball : MonoBehaviour
 {
+    public static Ball Instance { get; private set; }
+
     [SerializeField] private float _speed;
     [SerializeField] private float _maxSpeed;
+    [SerializeField] private float _minSpeed = 3;
     [SerializeField] private float _maxInitialSpeed;
     [SerializeField] private Vector2 direction;
     [SerializeField] private Transform model;
+
+    [Header("Звук")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip hitClip;
+    [SerializeField] private float minPitch = 1;
+    [SerializeField] private float maxPitch = 1.5f;
+
+    public float SpeedPercent => _speed / (_minSpeed + _maxSpeed);
+
     private Vector3 modelScale;
     private Rigidbody rb;
 
@@ -20,33 +32,37 @@ public class Ball : MonoBehaviour
 
     public void Init()
     {
+        Instance = this;
         rb = GetComponent<Rigidbody>();
         modelScale = model.localScale;
-        Enable();      
+        _speed = _minSpeed;
+        Enable();
     }
 
     private void FixedUpdate()
     {
-        if(Active)
+        if (Active)
             rb.linearVelocity = direction * _speed;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(Active == false) return;
+        if (Active == false) return;
 
-        if(collision.gameObject.TryGetComponent(out BallDirectionChanger dirChanger))
+        if (collision.gameObject.TryGetComponent(out Reflector reflector))
         {
-            direction = dirChanger.GetNewDirection(direction);
+            direction = reflector.Reflect(direction);
+
+            if (reflector.addSpeed)
+            {
+                _speed += 0.3f;
+                _speed = Mathf.Min(_speed, _maxSpeed);
+            }
         }
-        if(collision.gameObject.TryGetComponent(out Paddle paddle))
-        {
-            paddle.HitAnimation();
-            _speed += 0.3f;
-            _speed = Mathf.Min(_speed, _maxSpeed);
-        }
+
         HitAnimation();
         HitParticles(collision.contacts[0].point);
+        HitSound();
     }
 
     public void HitAnimation()
@@ -73,5 +89,11 @@ public class Ball : MonoBehaviour
     public void HitParticles(Vector3 position)
     {
         Instantiate(hitParticles, position, Quaternion.identity);
+    }
+
+    public void HitSound()
+    {
+        audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, SpeedPercent);
+        audioSource.PlayOneShot(hitClip);
     }
 }

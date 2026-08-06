@@ -21,6 +21,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI backCountLabel;
 
+    [Header("Sound")]
+    [SerializeField] AudioSource source;
+    [SerializeField] AudioClip backCountClip;
+    [SerializeField] AudioClip startClip;
+
     private void Awake()
     {
         Instance = this;
@@ -82,6 +87,7 @@ public class GameManager : MonoBehaviour
         {
             EnableInputs();
             ball.Enable();
+            source.PlayOneShot(startClip);
         });
 
         seq.PlayForward();
@@ -94,14 +100,17 @@ public class GameManager : MonoBehaviour
         backCountLabel.transform.localScale = Vector3.zero;
 
         seq.AppendCallback(() => backCountLabel.text = "3...");
+        seq.AppendCallback(() => source.PlayOneShot(backCountClip));
         seq.Append(backCountLabel.transform.DOScale(1, 0.4f).SetEase(Ease.OutBack));
         seq.Append(backCountLabel.transform.DOScale(0, 0.4f).SetEase(Ease.InBack));
 
         seq.AppendCallback(() => backCountLabel.text = "2...");
+        seq.AppendCallback(() => source.PlayOneShot(backCountClip));
         seq.Append(backCountLabel.transform.DOScale(1, 0.4f).SetEase(Ease.OutBack));
         seq.Append(backCountLabel.transform.DOScale(0, 0.4f).SetEase(Ease.InBack));
 
         seq.AppendCallback(() => backCountLabel.text = "1...");
+        seq.AppendCallback(() => source.PlayOneShot(backCountClip));
         seq.Append(backCountLabel.transform.DOScale(1, 0.4f).SetEase(Ease.OutBack));
         seq.Append(backCountLabel.transform.DOScale(0, 0.4f).SetEase(Ease.InBack));
 

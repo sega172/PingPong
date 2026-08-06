@@ -1,15 +1,18 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class BallDirectionChanger : MonoBehaviour
+public class Reflector : MonoBehaviour
 {
+    public event Action OnHit;
+    public bool addSpeed = false;
     [SerializeField] private DirectionChangeMode changeXMode;
     [SerializeField] private DirectionChangeMode changeYMode;
 
-    public Vector3 GetNewDirection(Vector3 oldDirection)
+    public Vector3 Reflect(Vector3 oldDirection)
     {
         float x = ApplyDirectionChange(oldDirection.x, changeXMode);
         float y = ApplyDirectionChange(oldDirection.y, changeYMode);
-
+        OnHit?.Invoke();
         return new Vector3(x, y);
     }
 

@@ -1,15 +1,23 @@
 ﻿using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody))]
 public class Paddle : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] private Vector3 direction;
+    [SerializeField] private float _acceleration = 10f;
+    [SerializeField] private float _deceleration = 15f;
     [SerializeField] Transform model;
 
     [SerializeField] private float yMin, yMax;
+    [SerializeField] AudioSource source;
+    [SerializeField] AudioSource engineSource;
+    [SerializeField] AudioClip hitSound;
+
+    [SerializeField] private float _bounceDamping = 1f;
+
+    [SerializeField] private List<Reflector> reflectors;
 
     private Vector3 modelScale;
     private Rigidbody rb;
@@ -17,7 +25,8 @@ public class Paddle : MonoBehaviour
     private bool isInit;
     private bool isBot;
     private InputAction action;
-
+    private float currentVelocity;
+    private float targetDirection;
 
     private void FixedUpdate()
     {
@@ -25,6 +34,10 @@ public class Paddle : MonoBehaviour
             return;
 
         TryMove();
+
+        float t = Mathf.Abs(currentVelocity) / _speed;
+        engineSource.volume = Mathf.Lerp(0, 0.5f, t);
+        engineSource.pitch = Mathf.Lerp(1f, 2f, t);
     }
 
     private void OnDestroy()
@@ -50,34 +63,60 @@ public class Paddle : MonoBehaviour
         }
         modelScale = model.transform.localScale;
         isInit = true;
+        currentVelocity = 0f;
+        targetDirection = 0f;
+        foreach (var reflector in reflectors)
+            reflector.OnHit += OnHit;
+
     }
 
     public void StartMoving(InputAction.CallbackContext ctx)
     {
         moving = true;
-        direction = Vector3.up * ctx.ReadValue<float>();
+        targetDirection = ctx.ReadValue<float>(); // -1 или 1
     }
 
     public void StopMoving(InputAction.CallbackContext ctx)
     {
         moving = false;
-        direction = Vector3.zero;
+        targetDirection = 0f;
     }
 
     private void TryMove()
     {
-        if (!moving) return;
+        if (moving)
+        {
+            currentVelocity += targetDirection * _acceleration * Time.fixedDeltaTime;
+            currentVelocity = Mathf.Clamp(currentVelocity, -_speed, _speed);
+        }
+        else
+        {
+            if (Mathf.Abs(currentVelocity) > 0.01f)
+            {
+                currentVelocity -= Mathf.Sign(currentVelocity) * _deceleration * Time.fixedDeltaTime;
 
-        rb.position += direction * _speed * Time.fixedDeltaTime;
-        rb.position = new Vector3(rb.position.x, Mathf.Clamp(rb.position.y, yMin, yMax), 0);
+                if (Mathf.Abs(currentVelocity) < 0.01f)
+                    currentVelocity = 0f;
+            }
+        }
+
+        rb.position += Vector3.up * currentVelocity * Time.fixedDeltaTime;
+        if(rb.position.y > yMax || rb.position.y < yMin)
+        {
+            rb.position = new Vector3(rb.position.x, Mathf.Clamp(rb.position.y, yMin, yMax), 0);
+            currentVelocity *= -_bounceDamping;
+        }
+
     }
 
-    public void HitAnimation()
+    public void OnHit()
     {
         var seq = DOTween.Sequence();
 
-        seq.Append(model.DOScale(modelScale * 0.95f, 0.05f));
+        seq.Append(model.DOScale(modelScale * 0.90f, 0.05f));
         seq.Append(model.DOScale(modelScale, 0.2f).SetEase(Ease.OutBack));
 
+        source.pitch = Mathf.Lerp(1, 2, Ball.Instance.SpeedPercent);
+        source.PlayOneShot(hitSound);
     }
 }
