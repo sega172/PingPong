@@ -13,12 +13,34 @@ public class Localizator : MonoBehaviour
     private void OnEnable()
     {
         label = GetComponent<TextMeshProUGUI>();
+        Localize(LanguageChanger.Language);
+
+        LanguageChanger.OnChangeLanguage += Localize;
+    }
+
+    private void OnDisable()
+    {
+        LanguageChanger.OnChangeLanguage -= Localize;
+    }
+
+    private void OnDestroy()
+    {
+        LanguageChanger.OnChangeLanguage -= Localize;
     }
 
     public void Localize(string locale = "ru")
     {
         if (localizations == null) throw new NullReferenceException($"Не установлена локализация для {name}");
-        label.text = localizations.Find(l => l.locale == locale).value;   
+
+        string localizedText = localizations.Find(l => l.locale == locale).value;
+
+        if(string.IsNullOrEmpty(localizedText))
+        {
+            label.text = localizations[0].value;
+            return;
+        }
+
+        label.text = localizedText;
     }
 
     [Serializable]
