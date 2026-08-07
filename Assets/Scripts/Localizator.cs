@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using YG;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class Localizator : MonoBehaviour
@@ -13,19 +14,20 @@ public class Localizator : MonoBehaviour
     private void OnEnable()
     {
         label = GetComponent<TextMeshProUGUI>();
-        Localize(LanguageChanger.Language);
+        Localize(YG2.lang);
 
-        LanguageChanger.OnChangeLanguage += Localize;
+        YG2.onSwitchLang += Localize;
+        
     }
 
     private void OnDisable()
     {
-        LanguageChanger.OnChangeLanguage -= Localize;
+        YG2.onSwitchLang -= Localize;
     }
 
     private void OnDestroy()
     {
-        LanguageChanger.OnChangeLanguage -= Localize;
+        YG2.onSwitchLang -= Localize;
     }
 
     public void Localize(string locale = "ru")

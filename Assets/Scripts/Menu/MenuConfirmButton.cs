@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
@@ -18,6 +19,6 @@ public class MenuConfirmButton : MonoBehaviour
 
     private void EnterGame()
     {
-        print($"Заход в игру. Режим: {GameSession.GameMode}");
+        SceneManager.LoadScene("Game");
     }
 }

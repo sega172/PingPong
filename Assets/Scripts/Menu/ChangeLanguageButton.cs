@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 [RequireComponent(typeof(Button))]
 public class ChangeLanguageButton : MonoBehaviour
@@ -8,7 +9,7 @@ public class ChangeLanguageButton : MonoBehaviour
 
     private Button button;
 
-    private void OnEnable()
+    private void /*OnEnable*/Start()
     {
         button = GetComponent<Button>();
 
@@ -21,6 +22,7 @@ public class ChangeLanguageButton : MonoBehaviour
 
     private void SetMyLanguage()
     {
-        LanguageChanger.SetLanguage(language);
+        
+        SettingsApplier.Instance.SetLanguage(language);
     }
 }
