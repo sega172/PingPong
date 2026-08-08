@@ -7,7 +7,6 @@ public class SettingsApplier : MonoBehaviour
 {
     public static SettingsApplier Instance;
 
-    public static event Action OnSettingsChanged;
     public static event Action OnSettingsSaved;
 
     public AudioMixer mixer;

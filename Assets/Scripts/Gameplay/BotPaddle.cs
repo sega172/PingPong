@@ -36,12 +36,12 @@ public class BotPaddle : MonoBehaviour
             enabled = false;
         }
 
-        ScoreManager.ScorePvpChanged += ScoreManager_ScorePvpChanged;
+        ScoreManager.OnScoreChanged += RecalculateDifficulty;
     }
 
-    private void ScoreManager_ScorePvpChanged(int score1, int arg2)
+    private void RecalculateDifficulty(int newScore)
     {
-        _difficulty = Mathf.Lerp(0f, 1f, score1 / 10f);
+        _difficulty = Mathf.Lerp(0f, 1f, newScore / 10f);
     }
 
     private void FixedUpdate()

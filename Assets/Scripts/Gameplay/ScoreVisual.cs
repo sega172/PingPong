@@ -8,17 +8,17 @@ public class ScoreVisual : MonoBehaviour
     private void Start()
     {
         label = GetComponent<TextMeshProUGUI>();
-        ScoreChanged(0, 0);
-        ScoreManager.ScorePvpChanged += ScoreChanged;
+        ScoreChanged(0);
+        ScoreManager.OnScoreChanged+= ScoreChanged;
     }
 
-    private void ScoreChanged(int score1, int score2)
+    private void ScoreChanged(int newScore)
     {
-        label.text = $"<color=red>{score1}</color>\t<color=#00FFFF>{score2}</color>";
+        label.text = $"<color=red>{newScore}</color>";
     }
 
     private void OnDestroy()
     {
-        ScoreManager.ScorePvpChanged -= ScoreChanged;
+        ScoreManager.OnScoreChanged -= ScoreChanged;
     }
 }

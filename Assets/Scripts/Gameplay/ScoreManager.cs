@@ -2,49 +2,24 @@ using System;
 
 public static class ScoreManager
 {
-    public static event Action<int, int> ScorePvpChanged;
-    public static event Action<int> ScorePveChanged;
+    public static event Action<int> OnScoreChanged;
 
-    private static GameMode _gameMode = GameMode.PvP;
+    public static int Score { get; private set; }
 
-    public static int Score1 { get; private set; }
-    public static int Score2 { get; private set; }
-    public static int ScoreVsBot { get; private set; }
-
-    public static void Initialize(GameMode gameMode)
+    public static void Initialize()
     {
-        Reset();
-        _gameMode = gameMode;
+        ResetScore();
     }
 
     public static void AddPoint(Team team)
     {
-        if(_gameMode == GameMode.PvP)
-            AddPointPvp(team);
-        else
-            AddPointPve(team);
+        Score += team == Team.Player1 ? 1 : -1;
+        OnScoreChanged?.Invoke(Score);
     }
 
-    private static void AddPointPvp(Team team)
+    public static void ResetScore()
     {
-        if (team == Team.Player1)
-            Score1++;
-        else //Player2
-            Score2++;
-
-        ScorePvpChanged?.Invoke(Score1, Score2);
-    }
-
-    private static void AddPointPve(Team team)
-    {
-        ScoreVsBot += team == Team.Player1 ? 1 : -1;
-        ScorePveChanged?.Invoke(ScoreVsBot);
-    }
-
-    public static void Reset()
-    {
-        Score1 = 0;
-        Score2 = 0;
-        ScoreVsBot = 0;
+        Score = 0;
+        OnScoreChanged?.Invoke(Score);
     }
 }

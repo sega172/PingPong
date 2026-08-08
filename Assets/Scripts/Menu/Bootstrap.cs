@@ -3,7 +3,6 @@ using YG;
 
 public class Bootstrap : MonoBehaviour
 {
-    [SerializeField] MenuManager menuManager;
     [SerializeField] SettingsApplier settingsApplier;
 
     private void Awake() => InitializeGame();
@@ -20,8 +19,6 @@ public class Bootstrap : MonoBehaviour
             FirtTimeInitialization();
         else
             NormalInitialization();
-
-        menuManager.Initialize();
     }
 
     private void FirtTimeInitialization()
