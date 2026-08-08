@@ -45,7 +45,7 @@ public class SettingsApplier : MonoBehaviour
             SetMusicVolume(value);
         else
             SetSoundsVolume(value);
-        saved = false;
+        TriggerSave();
     }
 
     private void SetMusicVolume(float value)
@@ -64,7 +64,7 @@ public class SettingsApplier : MonoBehaviour
     {
         YG2.saves.lang = value;
         YG2.SwitchLanguage(value);
-        saved = false;
+        TriggerSave();
     }
 
     private static float ConvertLinearToDecibels(float linear)
@@ -75,5 +75,10 @@ public class SettingsApplier : MonoBehaviour
         return Mathf.Log10(linear) * 20f;
     }
 
+    private void TriggerSave()
+    {
+        saved = false;
+        elapsed = 0;
+    }
     private static void Save() => YG2.SaveProgress();
 }

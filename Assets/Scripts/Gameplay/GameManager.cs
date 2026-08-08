@@ -1,11 +1,13 @@
 ﻿using DG.Tweening;
+using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    public static event Action<bool> OnSetControls;
 
     [SerializeField] private PlayerType player1Type;
     [SerializeField] private PlayerType player2Type;
@@ -14,10 +16,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Paddle paddle2;
 
     [SerializeField] Ball ball;
-
-    private InputAction player1;
-    private InputAction player2;
-    private InputAction playerBoth;
 
     [SerializeField] private TextMeshProUGUI backCountLabel;
 
@@ -31,10 +29,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        player1 = InputSystem.actions.FindAction("Player1");
-        player2 = InputSystem.actions.FindAction("Player2");
-        playerBoth = InputSystem.actions.FindAction("PlayerBoth");
         music.Play();
         music.volume = 0;
 
@@ -55,23 +49,9 @@ public class GameManager : MonoBehaviour
 
     private void InitializePaddles()
     {
-        InputAction paddle1Action = null;
-        InputAction paddle2Action = null;
 
-        (paddle1Action, paddle2Action) = (player1Type, player2Type) switch
-        {
-            (PlayerType.Player, PlayerType.Player) => (player1, player2),
-
-            (PlayerType.Player, PlayerType.Bot) => (playerBoth, null),
-            (PlayerType.Bot, PlayerType.Player) => (null, playerBoth),
-
-            (PlayerType.Bot, PlayerType.Bot) => (null, null),
-
-            _ => (null, null)
-        };
-
-        paddle1.Init(Team.Player1, isBot: player1Type == PlayerType.Bot, paddle1Action);
-        paddle2.Init(Team.Player2, isBot: player2Type == PlayerType.Bot, paddle2Action);
+        paddle1.Init(Team.Player1, isBot: player1Type == PlayerType.Bot);
+        paddle2.Init(Team.Player2, isBot: player2Type == PlayerType.Bot);
     }
 
     public void Restart()
@@ -97,6 +77,7 @@ public class GameManager : MonoBehaviour
         seq.InsertCallback(backCountDuration, () =>
         {
             EnableInputs();
+            print("Inputs en");
             ball.Enable();
             
             
@@ -138,19 +119,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    private void DisableInputs()
-    {
-        player1.Disable();
-        player2.Disable();
-        playerBoth.Disable();
-    }
+    private void DisableInputs() => OnSetControls?.Invoke(false);
 
-    private void EnableInputs()
-    {
-        player1.Enable();
-        player2.Enable();
-        playerBoth.Enable();
-    }
-
-
+    private void EnableInputs() => OnSetControls?.Invoke(true);
 }
