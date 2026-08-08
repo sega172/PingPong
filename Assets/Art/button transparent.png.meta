@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fc8cb8f050124d44f8fd5415011566b9
+guid: 3ff763a14e315d148b4476dc6b29c754
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -50,7 +50,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -110,23 +110,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: free-icon-turkey-555560_0
+      name: button transparent_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 85
-        width: 512
-        height: 342
+        y: 0
+        width: 86
+        height: 86
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 24, y: 24, z: 24, w: 24}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0f92baa2ccbd7743b4631daa567a8cc
-      internalID: -1100327027
+      spriteID: 73388356d885c8342b653a078f2e2b84
+      internalID: 1208164980
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 51d47fa9ecf08b243a38b3fb82126aeb
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,7 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      free-icon-turkey-555560_0: -1100327027
+      button transparent_0: 1208164980
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
