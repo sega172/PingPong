@@ -18,13 +18,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioClip _backCountClip;
     [SerializeField] AudioClip _startClip;
 
+    //
+    [SerializeField] private HeartsPanel heartsPanel;
+
     public static GameManager Instance { get; private set; }
+    public static PlayerHealth PlayerHealth { get; private set; }
 
     private void Awake()
     {
         Instance = this;
         _musicSource.Play();
         _musicSource.volume = 0;
+        
+        PlayerHealth = new PlayerHealth(initialHealth: 3);
 
         StartGame();
     }
@@ -51,6 +57,8 @@ public class GameManager : MonoBehaviour
     {
         Sequence seq = DOTween.Sequence();
 
+        seq.Append(heartsPanel.SetHearts(PlayerHealth.Health));
+        
         seq.AppendInterval(1);
 
         seq.Insert(1, _paddle1.transform.DOMoveY(0, 1).SetEase(Ease.OutBack));
