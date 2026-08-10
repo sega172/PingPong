@@ -541,10 +541,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90b7d265d074464ba8a205e50cb5fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingsApplier
-  _mixer: {fileID: 0}
-  _saveInterval: 2
-  _isDirty: 0
-  _elapsed: 0
 --- !u!4 &356858071
 Transform:
   m_ObjectHideFlags: 0
