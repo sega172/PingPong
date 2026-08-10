@@ -236,13 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c216fb58b7986b441a5a9fdeee80b7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Localizator
-  localizations:
-  - locale: ru
-    value: "\u041B\u0443\u0447\u0448\u0438\u0439 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442"
-  - locale: en
-    value: Best Score
-  - locale: tr
-    value: "En \u0130yi Skor"
+  _localizations: []
 --- !u!114 &116341603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,7 +496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb97c3104bac8c40a5be3305202aab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bootstrap
-  settingsApplier: {fileID: 356858070}
+  _settingsManager: {fileID: 0}
 --- !u!4 &356651453
 Transform:
   m_ObjectHideFlags: 0
@@ -547,10 +541,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90b7d265d074464ba8a205e50cb5fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingsApplier
-  mixer: {fileID: 24100000, guid: d488f736f8ce8b94aa5b7ea26b451d23, type: 2}
-  saved: 1
-  saveSettingsCuldown: 2
-  elapsed: 0
+  _mixer: {fileID: 0}
+  _saveInterval: 2
+  _isDirty: 0
+  _elapsed: 0
 --- !u!4 &356858071
 Transform:
   m_ObjectHideFlags: 0
@@ -722,9 +716,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd3720b31cc6ec489ceecc0b1716dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Reflector
-  addSpeed: 0
-  changeXMode: 2
-  changeYMode: 0
+  ShouldAddSpeed: 0
+  <ReflectionX>k__BackingField: 0
+  <ReflectionY>k__BackingField: 0
 --- !u!65 &535297096
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -838,9 +832,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd3720b31cc6ec489ceecc0b1716dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Reflector
-  addSpeed: 0
-  changeXMode: 1
-  changeYMode: 0
+  ShouldAddSpeed: 0
+  <ReflectionX>k__BackingField: 0
+  <ReflectionY>k__BackingField: 0
 --- !u!65 &591003832
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1156,9 +1150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd3720b31cc6ec489ceecc0b1716dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Reflector
-  addSpeed: 0
-  changeXMode: 0
-  changeYMode: 1
+  ShouldAddSpeed: 0
+  <ReflectionX>k__BackingField: 0
+  <ReflectionY>k__BackingField: 0
 --- !u!65 &818152629
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1252,6 +1246,10 @@ PrefabInstance:
     - target: {fileID: 8954600716614371202, guid: cf7463fbd2b2122409ecea874c391a6e, type: 3}
       propertyPath: VolumeKey
       value: Sounds
+      objectReference: {fileID: 0}
+    - target: {fileID: 8954600716614371202, guid: cf7463fbd2b2122409ecea874c391a6e, type: 3}
+      propertyPath: soundType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8985163533477304739, guid: cf7463fbd2b2122409ecea874c391a6e, type: 3}
       propertyPath: m_Pivot.x
@@ -1511,13 +1509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c216fb58b7986b441a5a9fdeee80b7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Localizator
-  localizations:
-  - locale: ru
-    value: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u044B"
-  - locale: en
-    value: Settings Saved
-  - locale: tr
-    value: Ayarlar Kaydedildi
+  _localizations: []
 --- !u!114 &1032396244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1668,13 +1660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c216fb58b7986b441a5a9fdeee80b7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Localizator
-  localizations:
-  - locale: ru
-    value: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
-  - locale: en
-    value: Settings
-  - locale: tr
-    value: Ayarlar
+  _localizations: []
 --- !u!114 &1164846055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2091,13 +2077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c216fb58b7986b441a5a9fdeee80b7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Localizator
-  localizations:
-  - locale: ru
-    value: "\u0413\u0440\u043E\u043C\u043A\u043E\u0441\u0442\u044C \u0437\u0432\u0443\u043A\u0430"
-  - locale: en
-    value: Sound Volume
-  - locale: tr
-    value: "M\xFCzik Sesi"
+  _localizations: []
 --- !u!114 &1353295878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2364,9 +2344,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd3720b31cc6ec489ceecc0b1716dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Reflector
-  addSpeed: 0
-  changeXMode: 0
-  changeYMode: 2
+  ShouldAddSpeed: 0
+  <ReflectionX>k__BackingField: 0
+  <ReflectionY>k__BackingField: 0
 --- !u!65 &1524780829
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2830,13 +2810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c216fb58b7986b441a5a9fdeee80b7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Localizator
-  localizations:
-  - locale: ru
-    value: "\u0412\u044B\u0431\u043E\u0440 \u044F\u0437\u044B\u043A\u0430"
-  - locale: en
-    value: Language
-  - locale: tr
-    value: Dil
+  _localizations: []
 --- !u!114 &1878675439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2992,13 +2966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c216fb58b7986b441a5a9fdeee80b7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Localizator
-  localizations:
-  - locale: ru
-    value: "\u0418\u0433\u0440\u0430\u0442\u044C"
-  - locale: en
-    value: Play
-  - locale: tr
-    value: Oyna
+  _localizations: []
 --- !u!114 &1894367116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3292,13 +3260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c216fb58b7986b441a5a9fdeee80b7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Localizator
-  localizations:
-  - locale: ru
-    value: "\u0413\u0440\u043E\u043C\u043A\u043E\u0441\u0442\u044C \u043C\u0443\u0437\u044B\u043A\u0438"
-  - locale: en
-    value: Music Volume
-  - locale: tr
-    value: "M\xFCzik Sesi"
+  _localizations: []
 --- !u!114 &2107675867
 MonoBehaviour:
   m_ObjectHideFlags: 0

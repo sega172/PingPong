@@ -1,24 +1,21 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class ScoreVisual : MonoBehaviour
 {
-    TextMeshProUGUI label;
+    private TextMeshProUGUI _label;
+
     private void Start()
     {
-        label = GetComponent<TextMeshProUGUI>();
-        ScoreChanged(0);
-        ScoreManager.OnScoreChanged+= ScoreChanged;
+        _label = GetComponent<TextMeshProUGUI>();
+        DisplayScore(0);
+        ScoreManager.OnScoreChanged += DisplayScore;
     }
 
-    private void ScoreChanged(int newScore)
-    {
-        label.text = $"<color=red>{newScore}</color>";
-    }
+    private void OnDestroy() 
+        => ScoreManager.OnScoreChanged -= DisplayScore;
 
-    private void OnDestroy()
-    {
-        ScoreManager.OnScoreChanged -= ScoreChanged;
-    }
+    private void DisplayScore(int newScore) 
+        => _label.text = $"<color=red>{newScore}</color>";
 }

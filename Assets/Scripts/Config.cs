@@ -1,9 +1,6 @@
-using YG;
-
-public static class GameSession
+﻿public static class Config
 {
     public static bool FirstTime = true;
-    public static YG2.Device Device {  get; set; }   
 }
 
 namespace YG

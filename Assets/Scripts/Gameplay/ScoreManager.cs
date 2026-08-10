@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 public static class ScoreManager
 {
@@ -7,13 +7,11 @@ public static class ScoreManager
     public static int Score { get; private set; }
 
     public static void Initialize()
-    {
-        ResetScore();
-    }
+        => ResetScore();
 
-    public static void AddPoint(Team team)
+    public static void AddPoint()
     {
-        Score += team == Team.Player1 ? 1 : -1;
+        Score++;
         OnScoreChanged?.Invoke(Score);
     }
 

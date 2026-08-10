@@ -1,21 +1,18 @@
-using UnityEngine;
+﻿using UnityEngine;
 using YG;
 
 public class Bootstrap : MonoBehaviour
 {
-    [SerializeField] SettingsApplier settingsApplier;
+    [SerializeField] private SettingsManager _settingsManager;
 
     private void Awake() => InitializeGame();
 
-
     public void InitializeGame()
     {
-        GameSession.Device = YG2.envir.device;
-        GameSession.FirstTime = YG2.isFirstGameSession;
+        Config.FirstTime = YG2.isFirstGameSession;
+        _settingsManager.Init();
 
-        settingsApplier.Init();
-
-        if (GameSession.FirstTime)
+        if (Config.FirstTime)
             FirtTimeInitialization();
         else
             NormalInitialization();
@@ -23,17 +20,17 @@ public class Bootstrap : MonoBehaviour
 
     private void FirtTimeInitialization()
     {
-        settingsApplier.SetLanguage(YG2.lang/*.language*/);
-        settingsApplier.SetVolume("Music", 0.75f);
-        settingsApplier.SetVolume("Sounds", 0.75f);
+        _settingsManager.SetLanguage(YG2.lang/*.language*/);
+        _settingsManager.SetVolume(SoundType.Music, 0.75f);
+        _settingsManager.SetVolume(SoundType.VFX, 0.75f);
 
-        GameSession.FirstTime = false;
+        Config.FirstTime = false;
     }
 
     private void NormalInitialization()
     {
-        settingsApplier.SetLanguage(YG2.saves.lang);
-        settingsApplier.SetVolume("Music", YG2.saves.musicVolume);
-        settingsApplier.SetVolume("Sounds", YG2.saves.soundVolume);
+        _settingsManager.SetLanguage(YG2.saves.lang);
+        _settingsManager.SetVolume(SoundType.Music, YG2.saves.musicVolume);
+        _settingsManager.SetVolume(SoundType.VFX, YG2.saves.soundVolume);
     }
 }

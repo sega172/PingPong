@@ -10,39 +10,36 @@ public class Ball : MonoBehaviour
     [SerializeField] private float _maxSpeed;
     [SerializeField] private float _minSpeed = 3;
     [SerializeField] private float _maxInitialSpeed;
-    [SerializeField] private Vector2 direction;
-    [SerializeField] private Transform model;
-
-    [Header("Звук")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip hitClip;
-    [SerializeField] private float minPitch = 1;
-    [SerializeField] private float maxPitch = 1.5f;
-
-    public float SpeedPercent => _speed / (_minSpeed + _maxSpeed);
-
-    private Vector3 modelScale;
-    private Rigidbody rb;
-
+    [SerializeField] private Vector2 _direction;
+    [SerializeField] private Transform _model;
     [SerializeField] ParticleSystem hitParticles;
 
-    public bool Active;
+    [Header("Звук")]
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip _hitClip;
+    [SerializeField] private float _minPitch = 1;
+    [SerializeField] private float _maxPitch = 1.5f;
+
+    private Vector3 _modelScale;
+    private Rigidbody _rb;
+
+    public float SpeedPercent => _speed / (_minSpeed + _maxSpeed);
+    public bool Active { get; private set; }
 
     private void Awake() => Init();
 
     public void Init()
     {
         Instance = this;
-        rb = GetComponent<Rigidbody>();
-        modelScale = model.localScale;
+        _rb = GetComponent<Rigidbody>();
+        _modelScale = _model.localScale;
         _speed = _minSpeed;
         Enable();
     }
 
     private void FixedUpdate()
     {
-        if (Active)
-            rb.linearVelocity = direction * _speed;
+        if (Active) _rb.linearVelocity = _direction * _speed;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -51,9 +48,9 @@ public class Ball : MonoBehaviour
 
         if (collision.gameObject.TryGetComponent(out Reflector reflector))
         {
-            direction = reflector.Reflect(direction);
+            ChangeDirection(reflector.ReflectionX, reflector.ReflectionY);
 
-            if (reflector.addSpeed)
+            if (reflector.ShouldAddSpeed)
             {
                 _speed += 0.3f;
                 _speed = Mathf.Min(_speed, _maxSpeed);
@@ -68,25 +65,24 @@ public class Ball : MonoBehaviour
     {
         var seq = DOTween.Sequence();
 
-        seq.Append(model.DOScale(modelScale * 0.6f, 0.1f));
-        seq.Append(model.DOScale(modelScale, 0.2f));
-
+        seq.Append(_model.DOScale(_modelScale * 0.6f, 0.1f));
+        seq.Append(_model.DOScale(_modelScale, 0.2f));
     }
 
     public void Enable()
     {
         Active = true;
-        rb.isKinematic = false;
+        _rb.isKinematic = false;
         _speed = Mathf.Min(_speed, _maxInitialSpeed);
 
         int x = Random.Range(0, 2) == 0 ? -1 : 1;
         int y = Random.Range(0, 2) == 0 ? -1 : 1;
-        direction = new Vector2(x, y);
+        _direction = new Vector2(x, y);
     }
     public void Disable()
     {
         Active = false;
-        rb.isKinematic = true;
+        _rb.isKinematic = true;
     }
 
     public void HitParticles(Vector3 contactPoint)
@@ -97,7 +93,29 @@ public class Ball : MonoBehaviour
 
     public void HitSound()
     {
-        audioSource.pitch = Mathf.Lerp(minPitch, maxPitch, SpeedPercent);
-        audioSource.PlayOneShot(hitClip);
+        _audioSource.pitch = Mathf.Lerp(_minPitch, _maxPitch, SpeedPercent);
+        _audioSource.PlayOneShot(_hitClip);
+    }
+
+    private static int GetSign(ReflectDirection xDirectionSign)
+    => xDirectionSign switch
+    {
+        ReflectDirection.Positive => 1,
+        ReflectDirection.Negative => -1,
+        _ => 0,
+    };
+
+    private static float ApplySing(ref float value, int sign)
+        => sign == 0 ? value : sign * Mathf.Abs(value);
+
+    private void ChangeDirection(ReflectDirection reflectionX, ReflectDirection reflectionY)
+    {
+        float x = _direction.x;
+        float y = _direction.y;
+
+        ApplySing(ref x, GetSign(reflectionX));
+        ApplySing(ref y, GetSign(reflectionY));
+
+        _direction = new Vector2(x, y);
     }
 }

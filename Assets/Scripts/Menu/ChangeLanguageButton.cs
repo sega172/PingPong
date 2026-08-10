@@ -1,15 +1,14 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using YG;
 
 [RequireComponent(typeof(Button))]
 public class ChangeLanguageButton : MonoBehaviour
 {
-    [SerializeField] string language;
-
-    [SerializeField] Image frame;
-    [SerializeField] Color selectedColor;
-    [SerializeField] Color normalColor;
+    [SerializeField] string _language;
+    [SerializeField] Image _frame;
+    [SerializeField] Color _selectedColor;
+    [SerializeField] Color _normalColor;
 
     private Button button;
 
@@ -23,7 +22,6 @@ public class ChangeLanguageButton : MonoBehaviour
 
     private void OnDisable() => Unsubscribe();
 
-
     private void OnDestroy() => Unsubscribe();
 
     private void Unsubscribe()
@@ -32,11 +30,9 @@ public class ChangeLanguageButton : MonoBehaviour
         YG2.onSwitchLang -= UpdateColor;
     }
 
-    private void UpdateColor(string newLang)
-    {
-        Color color = newLang == language ? selectedColor : normalColor;
-        frame.color = color;
-    }
+    private void UpdateColor(string newLang) 
+        => _frame.color = newLang == _language ? _selectedColor : _normalColor;
 
-    private void SetMyLanguage() => SettingsApplier.Instance.SetLanguage(language);
+    private void SetMyLanguage() 
+        => SettingsManager.Instance.SetLanguage(_language);
 }

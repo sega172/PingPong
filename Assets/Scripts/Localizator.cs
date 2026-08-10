@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,46 +7,38 @@ using YG;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class Localizator : MonoBehaviour
 {
-    [SerializeField] List<LocString> localizations;
-    private TextMeshProUGUI label;
-
+    [SerializeField] List<Localization> _localizations;
+    private TextMeshProUGUI _label;
 
     private void OnEnable()
     {
-        label = GetComponent<TextMeshProUGUI>();
+        _label = GetComponent<TextMeshProUGUI>();
         Localize(YG2.lang);
 
         YG2.onSwitchLang += Localize;
-        
     }
 
-    private void OnDisable()
-    {
-        YG2.onSwitchLang -= Localize;
-    }
+    private void OnDisable() => YG2.onSwitchLang -= Localize;
 
-    private void OnDestroy()
-    {
-        YG2.onSwitchLang -= Localize;
-    }
+    private void OnDestroy() => YG2.onSwitchLang -= Localize;
 
     public void Localize(string locale = "ru")
     {
-        if (localizations == null) throw new NullReferenceException($"Íå óñòàíîâëåíà ëîêàëèçàöèÿ äëÿ {name}");
+        if (_localizations == null) throw new NullReferenceException($"ÐÐµ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð° Ð»Ð¾ÐºÐ°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð´Ð»Ñ {name}");
 
-        string localizedText = localizations.Find(l => l.locale == locale).value;
+        string localizedText = _localizations.Find(l => l.locale == locale).value;
 
         if(string.IsNullOrEmpty(localizedText))
         {
-            label.text = localizations[0].value;
+            _label.text = _localizations[0].value;
             return;
         }
 
-        label.text = localizedText;
+        _label.text = localizedText;
     }
 
     [Serializable]
-    public struct LocString
+    public struct Localization
     {
         public string locale;
         public string value;
