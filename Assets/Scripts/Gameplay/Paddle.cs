@@ -5,22 +5,24 @@ using UnityEngine;
 public class Paddle : MonoBehaviour, IMovable
 {
     [Header("Физика")]
-    [SerializeField] private float _speed;
-    [SerializeField] private float _acceleration = 10f;
-    [SerializeField] private float _deceleration = 15f;
-    [SerializeField] private float _bounceDamping = 1f;
-    [SerializeField] private float _yMin, _yMax;
+    public float _speed;
+    public float _acceleration = 10f;
+    public float _deceleration = 15f;
+    public float _bounceDamping = 1f;
+    public float _yMin, _yMax;
     [SerializeField] private List<Reflector> _reflectors;
-    private float _targetDirection;
-    private float _currentVelocity;
-    private Rigidbody _rb;
+    public float _targetDirection;
+    public float _currentVelocity;
+    public Rigidbody _rb;
+
+    public Transform upBound, downBound;
 
     [Header("Визуал")]
     [SerializeField] Transform _model;
     [SerializeField] AudioClip _hitSound;
 
     // состояние
-    private bool _moving;
+    public bool _moving;
     private bool _isInit;
 
     private void FixedUpdate()

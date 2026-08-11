@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     //
     [SerializeField] private HeartsPanel heartsPanel;
 
+    public Transform UpWallPoint;
+    public Transform DownWallPoint;
+
     public static GameManager Instance { get; private set; }
     public static PlayerHealth PlayerHealth { get; private set; }
 
