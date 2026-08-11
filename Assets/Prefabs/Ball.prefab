@@ -5048,7 +5048,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fbc498711886db64d95b7ec39d115abd, type: 2}
+  - {fileID: 2100000, guid: 29ad7d9bc43b1c34896de009f54a2377, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5163,13 +5163,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 81cc8dfe1c7b72347bf19b596fd0c0f7, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 81cc8dfe1c7b72347bf19b596fd0c0f7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: a16d9faea694a8947bb5697d39f87e57, type: 2}
+      objectReference: {fileID: 2100000, guid: 367125d0f5cf86a45ac46c2193286a4c, type: 2}
     - target: {fileID: -7511558181221131132, guid: 81cc8dfe1c7b72347bf19b596fd0c0f7, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
       objectReference: {fileID: 2100000, guid: 367125d0f5cf86a45ac46c2193286a4c, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 81cc8dfe1c7b72347bf19b596fd0c0f7, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -2047062162144267451, guid: 168f5f4766e59c54280e10bd9c4dc2cb, type: 3}
     - target: {fileID: 919132149155446097, guid: 81cc8dfe1c7b72347bf19b596fd0c0f7, type: 3}
       propertyPath: m_Name
       value: ball
