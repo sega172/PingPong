@@ -17,5 +17,5 @@ public class ScoreVisual : MonoBehaviour
         => ScoreManager.OnScoreChanged -= DisplayScore;
 
     private void DisplayScore(int newScore) 
-        => _label.text = $"<color=red>{newScore}</color>";
+        => _label.text = newScore.ToString();
 }
