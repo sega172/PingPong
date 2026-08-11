@@ -2581,6 +2581,7 @@ GameObject:
   - component: {fileID: 1739078248}
   - component: {fileID: 1739078250}
   - component: {fileID: 1739078249}
+  - component: {fileID: 1739078251}
   m_Layer: 5
   m_Name: best Value
   m_TagString: Untagged
@@ -2707,6 +2708,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1739078247}
   m_CullTransparentMesh: 1
+--- !u!114 &1739078251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739078247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5508682df68f1b4996d69e3c210028c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BestScoreSign
 --- !u!1 &1801156132
 GameObject:
   m_ObjectHideFlags: 0

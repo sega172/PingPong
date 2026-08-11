@@ -12,6 +12,8 @@ public class Bootstrap : MonoBehaviour
         Config.FirstTime = YG2.isFirstGameSession;
         _settingsManager.Init();
 
+        YG2.InterstitialAdvShow();
+
         if (Config.FirstTime)
             FirtTimeInitialization();
         else

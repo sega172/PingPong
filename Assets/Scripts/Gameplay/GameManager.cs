@@ -36,11 +36,13 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        StopGame();
         Instance = this;
         _musicSource.Play();
         _musicSource.volume = 0;
 
         PlayerHealth = new PlayerHealth(initialHealth: 3);
+        ScoreManager.ResetScore();
 
         if (_goals != null)
             foreach (Goal goal in _goals)
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour
 
         YG2.onRewardAdv += OnReward;
         YG2.onErrorRewardedAdv += GameOver;
+        YG2.onCloseRewardedAdv += PrepareAndStart;
 
         StartGame();
     }
@@ -58,9 +61,8 @@ public class GameManager : MonoBehaviour
             foreach (Goal goal in _goals)
                 goal.OnGoal -= OnGoal;
         YG2.onRewardAdv -= OnReward;
-
         YG2.onErrorRewardedAdv -= GameOver;
-        //YG2.onCloseRewardedAdv -= GameOver;
+        YG2.onCloseRewardedAdv -= PrepareAndStart;
     }
 
     private void OnGoal(Team team)
