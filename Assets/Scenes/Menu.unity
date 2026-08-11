@@ -236,7 +236,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c216fb58b7986b441a5a9fdeee80b7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Localizator
-  _localizations: []
+  _localizations:
+  - locale: ru
+    value: "\u0420\u0435\u043A\u043E\u0440\u0434"
+  - locale: en
+    value: High Score
+  - locale: tr
+    value: Rekor
 --- !u!114 &116341603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,7 +263,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041B\u0443\u0447\u0448\u0438\u0439 \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442"
+  m_text: "\u0420\u0435\u043A\u043E\u0440\u0434"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 95e7f284610438742a1bd052d29e38bf, type: 2}
   m_sharedMaterial: {fileID: -5555129604970363226, guid: 95e7f284610438742a1bd052d29e38bf, type: 2}
@@ -453,6 +459,10 @@ PrefabInstance:
       propertyPath: language
       value: en
       objectReference: {fileID: 0}
+    - target: {fileID: 4773328803221129830, guid: 063963fd94683a641ab77a618261799c, type: 3}
+      propertyPath: _language
+      value: en
+      objectReference: {fileID: 0}
     - target: {fileID: 8934741926964222619, guid: 063963fd94683a641ab77a618261799c, type: 3}
       propertyPath: m_Name
       value: En
@@ -496,7 +506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb97c3104bac8c40a5be3305202aab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bootstrap
-  _settingsManager: {fileID: 0}
+  _settingsManager: {fileID: 356858070}
 --- !u!4 &356651453
 Transform:
   m_ObjectHideFlags: 0
@@ -538,9 +548,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 356858069}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f90b7d265d074464ba8a205e50cb5fa9, type: 3}
+  m_Script: {fileID: 11500000, guid: b90128e63da9c8b48928c1294fa619b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SettingsApplier
+  _mixer: {fileID: 24100000, guid: d488f736f8ce8b94aa5b7ea26b451d23, type: 2}
+  _saveInterval: 3
 --- !u!4 &356858071
 Transform:
   m_ObjectHideFlags: 0
@@ -713,7 +725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Reflector
   ShouldAddSpeed: 0
-  <ReflectionX>k__BackingField: 0
+  <ReflectionX>k__BackingField: 2
   <ReflectionY>k__BackingField: 0
 --- !u!65 &535297096
 BoxCollider:
@@ -829,7 +841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Reflector
   ShouldAddSpeed: 0
-  <ReflectionX>k__BackingField: 0
+  <ReflectionX>k__BackingField: 1
   <ReflectionY>k__BackingField: 0
 --- !u!65 &591003832
 BoxCollider:
@@ -1148,7 +1160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Reflector
   ShouldAddSpeed: 0
   <ReflectionX>k__BackingField: 0
-  <ReflectionY>k__BackingField: 0
+  <ReflectionY>k__BackingField: 1
 --- !u!65 &818152629
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1428,6 +1440,10 @@ PrefabInstance:
       propertyPath: language
       value: tr
       objectReference: {fileID: 0}
+    - target: {fileID: 4773328803221129830, guid: 063963fd94683a641ab77a618261799c, type: 3}
+      propertyPath: _language
+      value: tr
+      objectReference: {fileID: 0}
     - target: {fileID: 8934741926964222619, guid: 063963fd94683a641ab77a618261799c, type: 3}
       propertyPath: m_Name
       value: Tr
@@ -1505,7 +1521,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c216fb58b7986b441a5a9fdeee80b7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Localizator
-  _localizations: []
+  _localizations:
+  - locale: ru
+    value: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438 \u0441\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u044B"
+  - locale: en
+    value: Settings Saved
+  - locale: tr
+    value: Ayarlar Kaydedildi
 --- !u!114 &1032396244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1656,7 +1678,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c216fb58b7986b441a5a9fdeee80b7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Localizator
-  _localizations: []
+  _localizations:
+  - locale: ru
+    value: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+  - locale: en
+    value: Settings
+  - locale: tr
+    value: Ayarlar
 --- !u!114 &1164846055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2073,7 +2101,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c216fb58b7986b441a5a9fdeee80b7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Localizator
-  _localizations: []
+  _localizations:
+  - locale: ru
+    value: "\u0413\u0440\u043E\u043C\u043A\u043E\u0441\u0442\u044C \u0437\u0432\u0443\u043A\u0430"
+  - locale: en
+    value: Sound Volume
+  - locale: tr
+    value: Ses Sesi
 --- !u!114 &1353295878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2193,6 +2227,10 @@ PrefabInstance:
     - target: {fileID: 3284071080863761196, guid: 42dfcfa0ee904c448b019384b4b6c9ff, type: 3}
       propertyPath: _maxSpeed
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3284071080863761196, guid: 42dfcfa0ee904c448b019384b4b6c9ff, type: 3}
+      propertyPath: <Active>k__BackingField
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3758513141858068258, guid: 42dfcfa0ee904c448b019384b4b6c9ff, type: 3}
       propertyPath: OutputAudioMixerGroup
@@ -2342,7 +2380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Reflector
   ShouldAddSpeed: 0
   <ReflectionX>k__BackingField: 0
-  <ReflectionY>k__BackingField: 0
+  <ReflectionY>k__BackingField: 2
 --- !u!65 &1524780829
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2806,7 +2844,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c216fb58b7986b441a5a9fdeee80b7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Localizator
-  _localizations: []
+  _localizations:
+  - locale: ru
+    value: "\u0412\u044B\u0431\u0435\u0440\u0438\u0442\u0435 \u044F\u0437\u044B\u043A"
+  - locale: en
+    value: Select Language
+  - locale: tr
+    value: "Dil Se\xE7in"
 --- !u!114 &1878675439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2962,7 +3006,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c216fb58b7986b441a5a9fdeee80b7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Localizator
-  _localizations: []
+  _localizations:
+  - locale: ru
+    value: "\u0418\u0433\u0440\u0430\u0442\u044C"
+  - locale: en
+    value: Play
+  - locale: tr
+    value: Oyna
 --- !u!114 &1894367116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3256,7 +3306,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c216fb58b7986b441a5a9fdeee80b7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Localizator
-  _localizations: []
+  _localizations:
+  - locale: ru
+    value: "\u0413\u0440\u043E\u043C\u043A\u043E\u0441\u0442\u044C \u043C\u0443\u0437\u044B\u043A\u0438"
+  - locale: en
+    value: Music Volume
+  - locale: tr
+    value: "M\xFCzik Sesi"
 --- !u!114 &2107675867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3561,6 +3617,10 @@ PrefabInstance:
     - target: {fileID: 1695112990116150240, guid: 063963fd94683a641ab77a618261799c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4773328803221129830, guid: 063963fd94683a641ab77a618261799c, type: 3}
+      propertyPath: _language
+      value: ru
       objectReference: {fileID: 0}
     - target: {fileID: 8934741926964222619, guid: 063963fd94683a641ab77a618261799c, type: 3}
       propertyPath: m_Name

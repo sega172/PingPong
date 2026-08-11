@@ -101,14 +101,13 @@ MonoBehaviour:
   _maxSpeed: 12
   _minSpeed: 3
   _maxInitialSpeed: 6
-  direction: {x: -1, y: 1}
-  model: {fileID: 8746796327197517684}
-  audioSource: {fileID: 3758513141858068258}
-  hitClip: {fileID: 8300000, guid: 89748826b00a062488139620df5b1cb1, type: 3}
-  minPitch: 1
-  maxPitch: 1.5
+  _direction: {x: 0, y: 0}
+  _model: {fileID: 8746796327197517684}
   hitParticles: {fileID: 6975896235701290888, guid: 3114c5d12856bd44898483f3de4583f8, type: 3}
-  Active: 0
+  _audioSource: {fileID: 3758513141858068258}
+  _hitClip: {fileID: 8300000, guid: 89748826b00a062488139620df5b1cb1, type: 3}
+  _minPitch: 1
+  _maxPitch: 1.5
 --- !u!96 &323916229395597320
 TrailRenderer:
   serializedVersion: 4

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public static Ball Instance { get; private set; }
+    public float normalScale = 0.5f;
 
     [SerializeField] private float _speed;
     [SerializeField] private float _maxSpeed;
@@ -24,7 +25,7 @@ public class Ball : MonoBehaviour
     private Rigidbody _rb;
 
     public float SpeedPercent => _speed / (_minSpeed + _maxSpeed);
-    public bool Active { get; private set; }
+    [field: SerializeField] public bool Active { get; private set; }
 
     private void Awake() => Init();
 
@@ -105,7 +106,7 @@ public class Ball : MonoBehaviour
         _ => 0,
     };
 
-    private static float ApplySing(ref float value, int sign)
+    private static float ApplySign(float value, int sign)
         => sign == 0 ? value : sign * Mathf.Abs(value);
 
     private void ChangeDirection(ReflectDirection reflectionX, ReflectDirection reflectionY)
@@ -113,8 +114,8 @@ public class Ball : MonoBehaviour
         float x = _direction.x;
         float y = _direction.y;
 
-        ApplySing(ref x, GetSign(reflectionX));
-        ApplySing(ref y, GetSign(reflectionY));
+        x = ApplySign(x, GetSign(reflectionX));
+        y = ApplySign(y, GetSign(reflectionY));
 
         _direction = new Vector2(x, y);
     }

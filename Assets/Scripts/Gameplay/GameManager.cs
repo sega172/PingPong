@@ -65,13 +65,11 @@ public class GameManager : MonoBehaviour
         seq.Insert(1, _paddle2.transform.DOMoveY(0, 1).SetEase(Ease.OutBack));
         seq.Insert(1, GetBackCountSequence());
 
-        float ballScale = _ball.transform.localScale.x;
         float backCountDuration = 3.4f;
-        seq.Insert(backCountDuration - 1, _ball.transform.DOScale(ballScale, 1).SetEase(Ease.OutElastic));
+        seq.Insert(backCountDuration - 1, _ball.transform.DOScale(_ball.normalScale, 1).SetEase(Ease.OutElastic));
         seq.InsertCallback(backCountDuration, () =>
         {
             EnableInputs();
-            print("Inputs en");
             _ball.Enable();
         });
         return seq;

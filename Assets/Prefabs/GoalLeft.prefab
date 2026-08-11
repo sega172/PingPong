@@ -68,9 +68,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 626d1959e09d70d41b4fbb6d243191a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Goal
-  team: 0
-  source: {fileID: 8249624953103348113}
-  explosionSound: {fileID: 8300000, guid: 255eff0721f2b434bb3404979315b1ed, type: 3}
+  _team: 0
+  _source: {fileID: 8249624953103348113}
+  _explosionSound: {fileID: 8300000, guid: 255eff0721f2b434bb3404979315b1ed, type: 3}
 --- !u!54 &3679717531345183994
 Rigidbody:
   m_ObjectHideFlags: 0
