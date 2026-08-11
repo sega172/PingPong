@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     //
     [SerializeField] private HeartsPanel heartsPanel;
     [SerializeField] GetLifePanel _getLife;
+    [SerializeField] GameOverPanel _gameOverPanel;
 
     public Transform UpWallPoint;
     public Transform DownWallPoint;
@@ -47,7 +48,7 @@ public class GameManager : MonoBehaviour
         YG2.onRewardAdv += OnReward;
 
         YG2.onErrorRewardedAdv += GameOver;
-        YG2.onCloseRewardedAdv += GameOver;
+        //YG2.onCloseRewardedAdv += GameOver;
 
         StartGame();
     }
@@ -60,7 +61,7 @@ public class GameManager : MonoBehaviour
         YG2.onRewardAdv -= OnReward;
 
         YG2.onErrorRewardedAdv -= GameOver;
-        YG2.onCloseRewardedAdv -= GameOver;
+        //YG2.onCloseRewardedAdv -= GameOver;
     }
 
     private void OnGoal(Team team)
@@ -92,7 +93,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        print("GameOver");
+        _gameOverPanel.gameObject.SetActive(true);
     }
 
     private void StartGame()
