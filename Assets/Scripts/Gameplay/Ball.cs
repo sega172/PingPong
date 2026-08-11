@@ -41,7 +41,7 @@ public class Ball : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Active) _rb.linearVelocity = _direction * _speed;
+        if (Active) _rb.linearVelocity = _direction * _speed * Time.timeScale;
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using YG;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     //
     [SerializeField] private HeartsPanel heartsPanel;
+    [SerializeField] GetLifePanel _getLife;
 
     public Transform UpWallPoint;
     public Transform DownWallPoint;
@@ -42,6 +44,11 @@ public class GameManager : MonoBehaviour
             foreach (Goal goal in _goals)
                 goal.OnGoal += OnGoal;
 
+        YG2.onRewardAdv += OnReward;
+
+        YG2.onErrorRewardedAdv += GameOver;
+        YG2.onCloseRewardedAdv += GameOver;
+
         StartGame();
     }
 
@@ -50,6 +57,10 @@ public class GameManager : MonoBehaviour
         if (_goals != null)
             foreach (Goal goal in _goals)
                 goal.OnGoal -= OnGoal;
+        YG2.onRewardAdv -= OnReward;
+
+        YG2.onErrorRewardedAdv -= GameOver;
+        YG2.onCloseRewardedAdv -= GameOver;
     }
 
     private void OnGoal(Team team)
@@ -65,13 +76,23 @@ public class GameManager : MonoBehaviour
 
         if (PlayerHealth.Health < 1)
         {
-            print("Todo: реализовать выход из игры");
             GetPrepareAnimation().PlayForward();
+            OfferAds();
         }
         else
         {
             Instance.Restart();
         }
+    }
+
+    public void OfferAds()
+    {
+        _getLife.gameObject.SetActive(true);
+    }
+
+    public void GameOver()
+    {
+        print("GameOver");
     }
 
     private void StartGame()
@@ -93,6 +114,13 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         StopGame();
+
+        if (PlayerHealth.Health < 1)
+        {
+            GameOver();
+            return;
+        }
+
 
         Sequence restartSeq = DOTween.Sequence();
         restartSeq.Append(GetPrepareAnimation());
@@ -176,4 +204,10 @@ public class GameManager : MonoBehaviour
     private void DisableInputs() => OnSetControls?.Invoke(false);
 
     private void EnableInputs() => OnSetControls?.Invoke(true);
+    
+    private void OnReward(string id)
+    {
+        PlayerHealth.AddHealth(1);
+        Restart();
+    }    
 }
