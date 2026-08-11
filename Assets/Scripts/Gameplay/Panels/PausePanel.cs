@@ -1,7 +1,5 @@
 ﻿using DG.Tweening;
 using System;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,7 +10,6 @@ public class PausePanel : MonoBehaviour
     [SerializeField] private float _startY;
     [SerializeField] private CanvasGroup _group;
     [SerializeField] private RectTransform _panel;
-    [SerializeField] private List<RectTransform> _buttons;
 
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _menuButton;
@@ -24,9 +21,6 @@ public class PausePanel : MonoBehaviour
         _group.alpha = 0;
         _group.interactable = false;
         _panel.anchoredPosition = new Vector2(0, _startY);
-
-        foreach (var button in _buttons)
-            button.localScale = Vector3.zero;
 
         _playButton.onClick.AddListener(OnPlay);
         _menuButton.onClick.AddListener(OnMenu);
@@ -43,12 +37,12 @@ public class PausePanel : MonoBehaviour
 
     private void OnPlay()
     {
-        YG2.InterstitialAdvShow();
         CloseAnimation(() => Time.timeScale = 1);
     }
 
     private void OnMenu()
     {
+        YG2.InterstitialAdvShow();
         if(ScoreManager.Score > YG2.saves.record)
         {
             YG2.saves.record = ScoreManager.Score;
@@ -67,9 +61,6 @@ public class PausePanel : MonoBehaviour
 
         _sequence.Append(_panel.DOAnchorPosY(0, 0.5f).SetEase(Ease.OutBack));
         _sequence.Join(_group.DOFade(1, 0.5f).SetEase(Ease.Linear));
-
-        foreach (var button in _buttons)
-            _sequence.Insert(1, button.DOScale(0.5f, 0.5f).SetEase(Ease.OutBack));
 
         _sequence.AppendCallback(() => _group.interactable = true);
 

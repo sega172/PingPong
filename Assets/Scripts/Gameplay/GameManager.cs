@@ -47,9 +47,7 @@ public class GameManager : MonoBehaviour
                 goal.OnGoal += OnGoal;
 
         YG2.onRewardAdv += OnReward;
-
         YG2.onErrorRewardedAdv += GameOver;
-        //YG2.onCloseRewardedAdv += GameOver;
 
         StartGame();
     }
@@ -83,7 +81,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Instance.Restart();
+            PrepareAndStart();
         }
     }
 
@@ -100,7 +98,7 @@ public class GameManager : MonoBehaviour
     private void StartGame()
     {
         InitializePaddles();
-        Restart();
+        PrepareAndStart();
     }
 
     public void StopGame()
@@ -118,7 +116,7 @@ public class GameManager : MonoBehaviour
         _pausePanel.gameObject.SetActive(true);
     }
 
-    public void Restart()
+    public void PrepareAndStart()
     {
         StopGame();
 
@@ -128,12 +126,10 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-
-        Sequence restartSeq = DOTween.Sequence();
-        restartSeq.Append(GetPrepareAnimation());
-        restartSeq.Append(GetStartAnimation(startGameCallback: StartGame1));
-
-        restartSeq.PlayForward();
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(GetPrepareAnimation());
+        sequence.Append(GetStartAnimation(startGameCallback: StartGame1));
+        sequence.PlayForward();
     }
 
     private Sequence GetStartAnimation(Action startGameCallback)
@@ -215,6 +211,6 @@ public class GameManager : MonoBehaviour
     private void OnReward(string id)
     {
         PlayerHealth.AddHealth(1);
-        Restart();
+        PrepareAndStart();
     }
 }
