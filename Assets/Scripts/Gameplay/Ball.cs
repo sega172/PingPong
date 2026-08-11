@@ -14,6 +14,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private Vector2 _direction;
     [SerializeField] private Transform _model;
     [SerializeField] ParticleSystem hitParticles;
+    [SerializeField] ParticleSystem goalParticles;
 
     [Header("Звук")]
     [SerializeField] private AudioSource _audioSource;
@@ -91,6 +92,8 @@ public class Ball : MonoBehaviour
         var direction = (transform.position - contactPoint).normalized;
         Instantiate(hitParticles, contactPoint, Quaternion.LookRotation(direction));
     }
+
+    public void GoalParticles() => goalParticles.Emit(30);
 
     public void HitSound()
     {

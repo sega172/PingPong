@@ -245,6 +245,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &768133043 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 19088010253424568, guid: bf175df25f15b614d92b11c345f45426, type: 3}
+  m_PrefabInstance: {fileID: 3096597792315487697}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626d1959e09d70d41b4fbb6d243191a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Goal
 --- !u!1001 &837436458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -345,6 +356,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d02c57c4f6108b4d92a5d4ebdb5fe2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Paddle
+--- !u!114 &968808087 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 19088010253424568, guid: bf175df25f15b614d92b11c345f45426, type: 3}
+  m_PrefabInstance: {fileID: 983578126}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626d1959e09d70d41b4fbb6d243191a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Goal
 --- !u!1 &972133147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1282,6 +1304,9 @@ MonoBehaviour:
   heartsPanel: {fileID: 1068902463}
   UpWallPoint: {fileID: 1221032481}
   DownWallPoint: {fileID: 1242480723}
+  _goals:
+  - {fileID: 768133043}
+  - {fileID: 968808087}
 --- !u!4 &2007073759
 Transform:
   m_ObjectHideFlags: 0

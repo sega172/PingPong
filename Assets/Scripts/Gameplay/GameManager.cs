@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
     public Transform UpWallPoint;
     public Transform DownWallPoint;
 
+    [SerializeField] List<Goal> _goals;
+
     public static GameManager Instance { get; private set; }
     public static PlayerHealth PlayerHealth { get; private set; }
 
@@ -32,10 +35,43 @@ public class GameManager : MonoBehaviour
         Instance = this;
         _musicSource.Play();
         _musicSource.volume = 0;
-        
+
         PlayerHealth = new PlayerHealth(initialHealth: 3);
 
+        if (_goals != null)
+            foreach (Goal goal in _goals)
+                goal.OnGoal += OnGoal;
+
         StartGame();
+    }
+
+    private void OnDestroy()
+    {
+        if (_goals != null)
+            foreach (Goal goal in _goals)
+                goal.OnGoal -= OnGoal;
+    }
+
+    private void OnGoal(Team team)
+    {
+        _ball.GoalParticles();
+        StopGame();
+
+        Team winner = team == Team.Player ? Team.Bot : Team.Player;
+        if (winner == Team.Player)
+            ScoreManager.AddPoint();
+        else if (winner == Team.Bot)
+            PlayerHealth.RemoveHealth(1);
+
+        if (PlayerHealth.Health < 1)
+        {
+            print("Todo: реализовать выход из игры");
+            GetPrepareAnimation().PlayForward();
+        }
+        else
+        {
+            Instance.Restart();
+        }
     }
 
     private void StartGame()
@@ -44,40 +80,55 @@ public class GameManager : MonoBehaviour
         Restart();
     }
 
-    public void Restart()
+    public void StopGame()
     {
         _ball.Disable();
         DisableInputs();
         FadeMusic(false, 1);
-                
+
         _ball.transform.localScale = Vector3.zero;
         _ball.transform.position = Vector3.zero;
-
-        GetRestartAnimation().PlayForward();
     }
 
-    private Sequence GetRestartAnimation()
+    public void Restart()
+    {
+        StopGame();
+
+        Sequence restartSeq = DOTween.Sequence();
+        restartSeq.Append(GetPrepareAnimation());
+        restartSeq.Append(GetStartAnimation(startGameCallback: StartGame1));
+
+        restartSeq.PlayForward();
+    }
+
+    private Sequence GetStartAnimation(Action startGameCallback)
+    {
+        Sequence seq = DOTween.Sequence();
+        seq.Insert(1, GetBackCountSequence());
+        float backCountDuration = 3.4f;
+        seq.Insert(backCountDuration - 1, _ball.transform.DOScale(_ball.normalScale, 1).SetEase(Ease.OutElastic));
+        seq.InsertCallback(backCountDuration, StartGame1);
+        return seq;
+    }
+
+    private void StartGame1()
+    {
+        EnableInputs();
+        _ball.Enable();
+    }
+
+    private Sequence GetPrepareAnimation()
     {
         Sequence seq = DOTween.Sequence();
 
         seq.Append(heartsPanel.SetHearts(PlayerHealth.Health));
-        
         seq.AppendInterval(1);
-
         seq.Insert(1, _paddle1.transform.DOMoveY(0, 1).SetEase(Ease.OutBack));
         seq.Insert(1, _paddle2.transform.DOMoveY(0, 1).SetEase(Ease.OutBack));
-        seq.Insert(1, GetBackCountSequence());
 
-        float backCountDuration = 3.4f;
-        seq.Insert(backCountDuration - 1, _ball.transform.DOScale(_ball.normalScale, 1).SetEase(Ease.OutElastic));
-        seq.InsertCallback(backCountDuration, () =>
-        {
-            EnableInputs();
-            _ball.Enable();
-        });
         return seq;
     }
-   
+
     private Sequence GetBackCountSequence()
     {
         Sequence seq = DOTween.Sequence();
@@ -95,7 +146,7 @@ public class GameManager : MonoBehaviour
         seq.AppendCallback(() => _vfxSource.PlayOneShot(_backCountClip));
         seq.Append(_backCountLabel.transform.DOScale(1, step).SetEase(Ease.OutBack));
         seq.Append(_backCountLabel.transform.DOScale(0, step).SetEase(Ease.InBack));
-        
+
         seq.AppendCallback(() => _backCountLabel.text = "1...");
         seq.AppendCallback(() => _vfxSource.PlayOneShot(_backCountClip));
         seq.Append(_backCountLabel.transform.DOScale(1, step).SetEase(Ease.OutBack));
@@ -103,7 +154,7 @@ public class GameManager : MonoBehaviour
 
         seq.AppendCallback(() => _backCountLabel.text = "GO!");
         seq.AppendCallback(() => FadeMusic(true, 0.5f));
-        seq.AppendCallback(() => _vfxSource.PlayOneShot(_startClip)); 
+        seq.AppendCallback(() => _vfxSource.PlayOneShot(_startClip));
         seq.Append(_backCountLabel.transform.DOScale(1, 0.6f).SetEase(Ease.OutBack));
         seq.Append(_backCountLabel.transform.DOScale(0, 2f).SetEase(Ease.InBack));
 
