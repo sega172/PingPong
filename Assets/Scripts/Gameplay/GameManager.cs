@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private HeartsPanel heartsPanel;
     [SerializeField] GetLifePanel _getLife;
     [SerializeField] GameOverPanel _gameOverPanel;
+    [SerializeField] PausePanel _pausePanel;
 
     public Transform UpWallPoint;
     public Transform DownWallPoint;
@@ -110,6 +111,11 @@ public class GameManager : MonoBehaviour
 
         _ball.transform.localScale = Vector3.zero;
         _ball.transform.position = Vector3.zero;
+    }
+
+    public void Pause()
+    {
+        _pausePanel.gameObject.SetActive(true);
     }
 
     public void Restart()
@@ -205,10 +211,10 @@ public class GameManager : MonoBehaviour
     private void DisableInputs() => OnSetControls?.Invoke(false);
 
     private void EnableInputs() => OnSetControls?.Invoke(true);
-    
+
     private void OnReward(string id)
     {
         PlayerHealth.AddHealth(1);
         Restart();
-    }    
+    }
 }
