@@ -185,7 +185,14 @@ public class GameManager : MonoBehaviour
         seq.Append(_backCountLabel.transform.DOScale(1, step).SetEase(Ease.OutBack));
         seq.Append(_backCountLabel.transform.DOScale(0, step).SetEase(Ease.InBack));
 
-        seq.AppendCallback(() => _backCountLabel.text = "GO!");
+        string textGo = YG2.lang switch
+        {
+            "ru" => "Старт!",
+            "en" => "Go!",
+            "tr" => "Basla!"
+        };
+
+        seq.AppendCallback(() => _backCountLabel.text = textGo);
         seq.AppendCallback(() => FadeMusic(true, 0.5f));
         seq.AppendCallback(() => _vfxSource.PlayOneShot(_startClip));
         seq.Append(_backCountLabel.transform.DOScale(1, 0.6f).SetEase(Ease.OutBack));
