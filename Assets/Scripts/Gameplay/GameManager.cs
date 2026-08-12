@@ -51,8 +51,8 @@ public class GameManager : MonoBehaviour
         YG2.onRewardAdv += OnReward;
         YG2.onErrorRewardedAdv += GameOver;
         YG2.onCloseRewardedAdv += PrepareAndStart;
-
-        StartGame();
+        InitializePaddles();
+        PrepareAndStart();
     }
 
     private void OnDestroy()
@@ -95,12 +95,6 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         _gameOverPanel.gameObject.SetActive(true);
-    }
-
-    private void StartGame()
-    {
-        InitializePaddles();
-        PrepareAndStart();
     }
 
     public void StopGame()

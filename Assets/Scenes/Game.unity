@@ -2624,6 +2624,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 437966591888540961, guid: 2b77408f2e43a31488b122c97745ed6a, type: 3}
+      propertyPath: _rb
+      value: 
+      objectReference: {fileID: 1843148862}
+    - target: {fileID: 437966591888540961, guid: 2b77408f2e43a31488b122c97745ed6a, type: 3}
       propertyPath: _yMax
       value: 2.81
       objectReference: {fileID: 0}
@@ -5499,6 +5503,11 @@ MonoBehaviour:
   _scoreLabel: {fileID: 772333931}
   _bestScoreLabel: {fileID: 1740523598}
   _newBestSign: {fileID: 468038881}
+--- !u!54 &1843148862 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 1318711512585122931, guid: 2b77408f2e43a31488b122c97745ed6a, type: 3}
+  m_PrefabInstance: {fileID: 837436458}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1907957498
 GameObject:
   m_ObjectHideFlags: 0
@@ -6066,6 +6075,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d02c57c4f6108b4d92a5d4ebdb5fe2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Paddle
+--- !u!54 &2049107534 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 1318711512585122931, guid: 2b77408f2e43a31488b122c97745ed6a, type: 3}
+  m_PrefabInstance: {fileID: 7968496836155238097}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2066427592
 GameObject:
   m_ObjectHideFlags: 0
@@ -6645,6 +6659,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 437966591888540961, guid: 2b77408f2e43a31488b122c97745ed6a, type: 3}
+      propertyPath: _rb
+      value: 
+      objectReference: {fileID: 2049107534}
     - target: {fileID: 437966591888540961, guid: 2b77408f2e43a31488b122c97745ed6a, type: 3}
       propertyPath: _yMax
       value: 2.81

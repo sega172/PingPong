@@ -45,6 +45,7 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out Reflector reflector))
         {
             ChangeDirection(reflector.ReflectionX, reflector.ReflectionY);
+            reflector.InvokeReflect();
 
             if (reflector.ShouldAddSpeed)
             {

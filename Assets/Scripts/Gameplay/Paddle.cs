@@ -25,6 +25,8 @@ public class Paddle : MonoBehaviour, IMovable
     public bool _moving;
     private bool _isInit;
 
+    private Sequence hitAnimation;
+
     private void FixedUpdate()
     {
         if (_isInit == false)
@@ -45,6 +47,14 @@ public class Paddle : MonoBehaviour, IMovable
             reflector.OnReflect += OnHit;
 
         GameManager.OnSetControls += GameManager_OnSetControls;
+
+
+        var seq = DOTween.Sequence();
+        seq.Append(_model.DOLocalMoveX(-0.1f, 0.05f).From(0));
+        seq.Append(_model.DOLocalMoveX(0, 1.3f).SetEase(Ease.OutElastic));
+        seq.SetAutoKill(false);
+        seq.Pause();
+        hitAnimation = seq;
 
         _isInit = true;
     }
@@ -92,9 +102,6 @@ public class Paddle : MonoBehaviour, IMovable
 
     public void OnHit()
     {
-        var seq = DOTween.Sequence();
-
-        seq.Append(_model.DOLocalMoveX(-0.1f, 0.05f));
-        seq.Append(_model.DOLocalMoveX(0, 1.3f).SetEase(Ease.OutElastic));
+        hitAnimation.Restart();   
     }
 }
