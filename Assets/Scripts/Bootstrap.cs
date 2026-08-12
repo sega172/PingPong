@@ -19,6 +19,10 @@ public class Bootstrap : MonoBehaviour
     public void InitializeGame()
     {
         Config.FirstTime = YG2.isFirstGameSession;
+
+        if (string.IsNullOrEmpty(YG2.saves.lang))
+            YG2.saves.lang = YG2.lang;
+
         _settingsManager.Init();
 
         YG2.InterstitialAdvShow();
@@ -33,7 +37,7 @@ public class Bootstrap : MonoBehaviour
 
     private void FirtTimeInitialization()
     {
-        _settingsManager.SetLanguage(YG2.lang);
+        _settingsManager.SetLanguage(YG2.saves.lang);
         _settingsManager.SetVolume(SoundType.Music, 0.75f);
         _settingsManager.SetVolume(SoundType.VFX, 0.75f);
 
