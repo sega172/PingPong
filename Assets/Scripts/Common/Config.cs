@@ -12,5 +12,6 @@ namespace YG
         public float musicVolume = 1f;
         public float soundVolume = 1f;
         public string lang = "ru";
+        public bool learnCompleted = false;
     }
 }

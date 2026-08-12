@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using YG;
 
 [RequireComponent(typeof(Button))]
 public class MenuPlayButton : MonoBehaviour
 {
+    [SerializeField] private GameObject _instruction;
     private Button _button;
 
     public void OnEnable()
@@ -17,5 +19,11 @@ public class MenuPlayButton : MonoBehaviour
 
     private void OnDestroy() => _button.onClick.RemoveListener(EnterGame);
 
-    private void EnterGame() => SceneManager.LoadScene("Game");
+    private void EnterGame()
+    {
+        if (YG2.saves.learnCompleted)
+            SceneManager.LoadScene("Game");
+        else
+            _instruction.SetActive(true);
+    }
 }
