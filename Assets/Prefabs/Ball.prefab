@@ -110,7 +110,9 @@ MonoBehaviour:
   _hitClip: {fileID: 8300000, guid: 89748826b00a062488139620df5b1cb1, type: 3}
   _minPitch: 1
   _maxPitch: 1.5
+  _rb: {fileID: 2647505974426515422}
   <Active>k__BackingField: 0
+  initOnStart: 0
 --- !u!82 &3758513141858068258
 AudioSource:
   m_ObjectHideFlags: 0

@@ -8,10 +8,10 @@ using YG;
 public class GameManager : MonoBehaviour
 {
     public static event Action<bool> OnSetControls;
+    public Ball _ball;
 
     [SerializeField] private Paddle _paddle1;
     [SerializeField] private Paddle _paddle2;
-    [SerializeField] private Ball _ball;
     [SerializeField] private TextMeshProUGUI _backCountLabel;
 
     [Header("Sound")]
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         _musicSource.Play();
         _musicSource.volume = 0;
-
+        _ball.Init();
         PlayerHealth = new PlayerHealth(initialHealth: 3);
         ScoreManager.ResetScore();
 

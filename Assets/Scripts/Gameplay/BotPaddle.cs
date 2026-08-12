@@ -18,10 +18,7 @@ public class BotPaddle : MonoBehaviour
     private void Start()
     {
         paddle = GetComponent<Paddle>();
-        if (Ball.Instance != null)
-            ball = Ball.Instance;
-        else
-            Debug.LogWarning("BotPaddle: Ball.Instance не найден!");
+        ball = GameManager.Instance._ball;
 
         RecalculateDifficulty(ScoreManager.Score);
         ScoreManager.OnScoreChanged += RecalculateDifficulty;

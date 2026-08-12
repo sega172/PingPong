@@ -1,5 +1,6 @@
 ﻿public static class Config
 {
+    public static bool Initialized = false;
     public static bool FirstTime = true;
 }
 

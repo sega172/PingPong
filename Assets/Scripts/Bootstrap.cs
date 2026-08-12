@@ -4,8 +4,17 @@ using YG;
 public class Bootstrap : MonoBehaviour
 {
     [SerializeField] private SettingsManager _settingsManager;
+    [SerializeField] private Ball _ball;
+    private void Awake()
+    {
+        if(Config.Initialized == false)
+            InitializeGame();
 
-    private void Awake() => InitializeGame();
+        _ball.Init();
+        _ball.Enable();
+
+        print("Awake");
+    }
 
     public void InitializeGame()
     {
@@ -18,11 +27,13 @@ public class Bootstrap : MonoBehaviour
             FirtTimeInitialization();
         else
             NormalInitialization();
+
+        Config.Initialized = true;
     }
 
     private void FirtTimeInitialization()
     {
-        _settingsManager.SetLanguage(YG2.lang/*.language*/);
+        _settingsManager.SetLanguage(YG2.lang);
         _settingsManager.SetVolume(SoundType.Music, 0.75f);
         _settingsManager.SetVolume(SoundType.VFX, 0.75f);
 

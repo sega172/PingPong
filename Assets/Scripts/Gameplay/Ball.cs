@@ -4,7 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Ball : MonoBehaviour
 {
-    public static Ball Instance { get; private set; }
     public float normalScale = 0.5f;
 
     [SerializeField] private float _speed;
@@ -23,20 +22,15 @@ public class Ball : MonoBehaviour
     [SerializeField] private float _maxPitch = 1.5f;
 
     private Vector3 _modelScale;
-    private Rigidbody _rb;
+    [SerializeField] Rigidbody _rb;
 
     public float SpeedPercent => _speed / (_minSpeed + _maxSpeed);
     [field: SerializeField] public bool Active { get; private set; }
 
-    private void Awake() => Init();
-
     public void Init()
     {
-        Instance = this;
-        _rb = GetComponent<Rigidbody>();
         _modelScale = _model.localScale;
         _speed = _minSpeed;
-        Enable();
     }
 
     private void FixedUpdate()

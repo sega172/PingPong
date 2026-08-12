@@ -49,7 +49,10 @@ public class PausePanel : MonoBehaviour
             YG2.SaveProgress();
         }
 
-        CloseAnimation(() => SceneManager.LoadScene("Menu"));
+        CloseAnimation(() => 
+        {
+            SceneManager.LoadScene("Menu");
+        });
     }
 
     private void OpenAnimation()
@@ -82,6 +85,7 @@ public class PausePanel : MonoBehaviour
         _sequence.onComplete += () =>
         {
             callback?.Invoke();
+            Time.timeScale = 1;
             gameObject.SetActive(false);
         };
         _sequence.SetUpdate(true);
