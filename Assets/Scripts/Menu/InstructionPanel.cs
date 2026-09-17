@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,6 +20,11 @@ public class InstructionPanel : MonoBehaviour
         GetOpenSequence().PlayForward();
     }
 
+    private void OnDisable()
+    {
+        _button.onClick.RemoveListener(GotoGame);
+    }
+
     private void Init()
     {
         _cachedPanelPositions = new float[_panels.Count];
@@ -38,7 +43,7 @@ public class InstructionPanel : MonoBehaviour
         _button.onClick.AddListener(GotoGame);
     }
 
-    Sequence GetOpenSequence()
+    private Sequence GetOpenSequence()
     {
         Sequence seq = DOTween.Sequence();
 
@@ -60,6 +65,7 @@ public class InstructionPanel : MonoBehaviour
     private void GotoGame()
     {
         YG2.saves.learnCompleted = true;
+        YG2.SaveProgress();
         SceneManager.LoadScene("Game");
     }
 }
