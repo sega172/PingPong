@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,22 +10,20 @@ public class Paddle : MonoBehaviour, IMovable
     public float _deceleration = 15f;
     public float _bounceDamping = 1f;
     public float _yMin, _yMax;
-    [SerializeField] private List<Reflector> _reflectors;
     public float _targetDirection;
     public float _currentVelocity;
     public Rigidbody _rb;
-
     public Transform upBound, downBound;
-
-    [Header("Визуал")]
-    [SerializeField] Transform _model;
-    [SerializeField] AudioClip _hitSound;
-
-    // состояние
     public bool _moving;
-    private bool _isInit;
 
-    private Sequence hitAnimation;
+    [SerializeField] private List<Reflector> _reflectors;
+    [SerializeField] private Transform _model;
+    [SerializeField] private AudioClip _hitSound;
+
+    private bool _isInit;
+    private Sequence _hitAnimation;
+
+    public float Speed => _speed;
 
     private void FixedUpdate()
     {
@@ -33,8 +31,21 @@ public class Paddle : MonoBehaviour, IMovable
             return;
 
         TryMove();
+    }
 
-        float t = Mathf.Abs(_currentVelocity) / _speed;
+    private void OnDestroy()
+    {
+        if (_isInit == false) return;
+
+        GameManager.OnSetControls -= GameManager_OnSetControls;
+
+        if (_reflectors != null)
+        {
+            foreach (var reflector in _reflectors)
+                if (reflector != null) reflector.OnReflect -= OnHit;
+        }
+
+        _hitAnimation?.Kill();
     }
 
     public void Init(Team team, bool isBot)
@@ -48,29 +59,26 @@ public class Paddle : MonoBehaviour, IMovable
 
         GameManager.OnSetControls += GameManager_OnSetControls;
 
-
         var seq = DOTween.Sequence();
         seq.Append(_model.DOLocalMoveX(-0.1f, 0.05f).From(0));
         seq.Append(_model.DOLocalMoveX(0, 1.3f).SetEase(Ease.OutElastic));
         seq.SetAutoKill(false);
         seq.Pause();
-        hitAnimation = seq;
+        _hitAnimation = seq;
 
         _isInit = true;
     }
 
-    private void OnDestroy()
-    {
-        if (_isInit == false) return;
+    public void SetDirection(float direction)
+        => _targetDirection = Mathf.Clamp(direction, -1f, 1f);
 
-        GameManager.OnSetControls -= GameManager_OnSetControls;
+    public void OnHit()
+    {
+        _hitAnimation?.Restart();
     }
 
-    private void GameManager_OnSetControls(bool enable) 
+    private void GameManager_OnSetControls(bool enable)
         => _moving = enable;
-
-    public void SetDirection(float direction) 
-        => _targetDirection = Mathf.Clamp(direction, -1f, 1f);
 
     private void TryMove()
     {
@@ -92,16 +100,10 @@ public class Paddle : MonoBehaviour, IMovable
 
         _rb.position += Vector3.up * _currentVelocity * Time.fixedDeltaTime;
 
-        if(_rb.position.y > _yMax || _rb.position.y < _yMin)
+        if (_rb.position.y > _yMax || _rb.position.y < _yMin)
         {
             _rb.position = new Vector3(_rb.position.x, Mathf.Clamp(_rb.position.y, _yMin, _yMax), 0);
             _currentVelocity *= -_bounceDamping;
         }
-
-    }
-
-    public void OnHit()
-    {
-        hitAnimation.Restart();   
     }
 }

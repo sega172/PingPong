@@ -1,5 +1,6 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Ball : MonoBehaviour
@@ -12,8 +13,9 @@ public class Ball : MonoBehaviour
     [SerializeField] private float _maxInitialSpeed;
     [SerializeField] private Vector2 _direction;
     [SerializeField] private Transform _model;
-    [SerializeField] ParticleSystem hitParticles;
-    [SerializeField] ParticleSystem goalParticles;
+    [SerializeField] private ParticleSystem hitParticles;
+    [SerializeField] private ParticleSystem goalParticles;
+    [SerializeField] private Rigidbody _rb;
 
     [Header("Звук")]
     [SerializeField] private AudioSource _audioSource;
@@ -22,20 +24,15 @@ public class Ball : MonoBehaviour
     [SerializeField] private float _maxPitch = 1.5f;
 
     private Vector3 _modelScale;
-    [SerializeField] Rigidbody _rb;
 
     public float SpeedPercent => _speed / (_minSpeed + _maxSpeed);
     [field: SerializeField] public bool Active { get; private set; }
-
-    public void Init()
-    {
-        _modelScale = _model.localScale;
-        _speed = _minSpeed;
-    }
+    public Vector3 Velocity => _rb != null ? _rb.linearVelocity : Vector3.zero;
 
     private void FixedUpdate()
     {
-        if (Active) _rb.linearVelocity = _direction * _speed * Time.timeScale;
+        if (Active)
+            _rb.linearVelocity = _direction * _speed;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -58,6 +55,12 @@ public class Ball : MonoBehaviour
         }
     }
 
+    public void Init()
+    {
+        _modelScale = _model.localScale;
+        _speed = _minSpeed;
+    }
+
     public void HitAnimation()
     {
         var seq = DOTween.Sequence();
@@ -76,6 +79,7 @@ public class Ball : MonoBehaviour
         int y = Random.Range(0, 2) == 0 ? -1 : 1;
         _direction = new Vector2(x, y);
     }
+
     public void Disable()
     {
         Active = false;
@@ -84,11 +88,17 @@ public class Ball : MonoBehaviour
 
     public void HitParticles(Vector3 contactPoint)
     {
+        if (hitParticles == null) return;
         var direction = (transform.position - contactPoint).normalized;
-        Instantiate(hitParticles, contactPoint, Quaternion.LookRotation(direction));
+        var particles = Instantiate(hitParticles, contactPoint, Quaternion.LookRotation(direction));
+        Destroy(particles.gameObject, 2f);
     }
 
-    public void GoalParticles() => goalParticles.Emit(30);
+    public void GoalParticles()
+    {
+        if (goalParticles != null)
+            goalParticles.Emit(30);
+    }
 
     public void HitSound()
     {
@@ -97,12 +107,12 @@ public class Ball : MonoBehaviour
     }
 
     private static int GetSign(ReflectDirection xDirectionSign)
-    => xDirectionSign switch
-    {
-        ReflectDirection.Positive => 1,
-        ReflectDirection.Negative => -1,
-        _ => 0,
-    };
+        => xDirectionSign switch
+        {
+            ReflectDirection.Positive => 1,
+            ReflectDirection.Negative => -1,
+            _ => 0,
+        };
 
     private static float ApplySign(float value, int sign)
         => sign == 0 ? value : sign * Mathf.Abs(value);

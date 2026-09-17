@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using UnityEngine;
 
 [RequireComponent(typeof(RectTransform))]
@@ -8,17 +8,22 @@ public class SettingsSavedSign : MonoBehaviour
     private Sequence _seq;
     private float _startX;
 
-    private void OnEnable()
+    private void Awake()
     {
         _rect = GetComponent<RectTransform>();
         _startX = _rect.anchoredPosition.x;
+    }
+
+    private void OnEnable()
+    {
         SettingsManager.OnSettingsSaved += SettingsApplier_OnSettingsSaved;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         SettingsManager.OnSettingsSaved -= SettingsApplier_OnSettingsSaved;
         _seq?.Kill();
+        _seq = null;
     }
 
     private void SettingsApplier_OnSettingsSaved()

@@ -1,35 +1,35 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using YG;
 
 public class GameManager : MonoBehaviour
 {
     public static event Action<bool> OnSetControls;
+
+    [FormerlySerializedAs("_ball")]
     public Ball _ball;
+    public Transform UpWallPoint;
+    public Transform DownWallPoint;
 
     [SerializeField] private Paddle _paddle1;
     [SerializeField] private Paddle _paddle2;
     [SerializeField] private TextMeshProUGUI _backCountLabel;
 
     [Header("Sound")]
-    [SerializeField] AudioSource _musicSource;
-    [SerializeField] AudioSource _vfxSource;
-    [SerializeField] AudioClip _backCountClip;
-    [SerializeField] AudioClip _startClip;
+    [SerializeField] private AudioSource _musicSource;
+    [SerializeField] private AudioSource _vfxSource;
+    [SerializeField] private AudioClip _backCountClip;
+    [SerializeField] private AudioClip _startClip;
 
-    //
     [SerializeField] private HeartsPanel heartsPanel;
-    [SerializeField] GetLifePanel _getLife;
-    [SerializeField] GameOverPanel _gameOverPanel;
-    [SerializeField] PausePanel _pausePanel;
-
-    public Transform UpWallPoint;
-    public Transform DownWallPoint;
-
-    [SerializeField] List<Goal> _goals;
+    [SerializeField] private GetLifePanel _getLife;
+    [SerializeField] private GameOverPanel _gameOverPanel;
+    [SerializeField] private PausePanel _pausePanel;
+    [SerializeField] private List<Goal> _goals;
 
     public static GameManager Instance { get; private set; }
     public static PlayerHealth PlayerHealth { get; private set; }
@@ -60,31 +60,10 @@ public class GameManager : MonoBehaviour
         if (_goals != null)
             foreach (Goal goal in _goals)
                 goal.OnGoal -= OnGoal;
+
         YG2.onRewardAdv -= OnReward;
         YG2.onErrorRewardedAdv -= GameOver;
         YG2.onCloseRewardedAdv -= PrepareAndStart;
-    }
-
-    private void OnGoal(Team team)
-    {
-        _ball.GoalParticles();
-        StopGame();
-
-        Team winner = team == Team.Player ? Team.Bot : Team.Player;
-        if (winner == Team.Player)
-            ScoreManager.AddPoint();
-        else if (winner == Team.Bot)
-            PlayerHealth.RemoveHealth(1);
-
-        if (PlayerHealth.Health < 1)
-        {
-            GetPrepareAnimation().PlayForward();
-            OfferAds();
-        }
-        else
-        {
-            PrepareAndStart();
-        }
     }
 
     public void OfferAds()
@@ -126,6 +105,28 @@ public class GameManager : MonoBehaviour
         sequence.Append(GetPrepareAnimation());
         sequence.Append(GetStartAnimation(startGameCallback: StartGame1));
         sequence.PlayForward();
+    }
+
+    private void OnGoal(Team team)
+    {
+        _ball.GoalParticles();
+        StopGame();
+
+        Team winner = team == Team.Player ? Team.Bot : Team.Player;
+        if (winner == Team.Player)
+            ScoreManager.AddPoint();
+        else if (winner == Team.Bot)
+            PlayerHealth.RemoveHealth(1);
+
+        if (PlayerHealth.Health < 1)
+        {
+            GetPrepareAnimation().PlayForward();
+            OfferAds();
+        }
+        else
+        {
+            PrepareAndStart();
+        }
     }
 
     private Sequence GetStartAnimation(Action startGameCallback)
@@ -183,7 +184,8 @@ public class GameManager : MonoBehaviour
         {
             "ru" => "Старт!",
             "en" => "Go!",
-            "tr" => "Basla!"
+            "tr" => "Basla!",
+            _ => "Go!"
         };
 
         seq.AppendCallback(() => _backCountLabel.text = textGo);

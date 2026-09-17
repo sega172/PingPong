@@ -5677,6 +5677,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   _ball: {fileID: 55621746}
+  UpWallPoint: {fileID: 1221032481}
+  DownWallPoint: {fileID: 1242480723}
   _paddle1: {fileID: 2049107532}
   _paddle2: {fileID: 861435198}
   _backCountLabel: {fileID: 1907957500}
@@ -5688,8 +5690,6 @@ MonoBehaviour:
   _getLife: {fileID: 233804726}
   _gameOverPanel: {fileID: 1841114708}
   _pausePanel: {fileID: 498911890}
-  UpWallPoint: {fileID: 1221032481}
-  DownWallPoint: {fileID: 1242480723}
   _goals:
   - {fileID: 768133043}
   - {fileID: 968808087}
