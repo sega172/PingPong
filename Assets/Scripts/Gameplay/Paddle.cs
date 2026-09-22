@@ -1,29 +1,30 @@
 using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Paddle : MonoBehaviour, IMovable
 {
-    [Header("Физика")]
-    public float _speed;
-    public float _acceleration = 10f;
-    public float _deceleration = 15f;
-    public float _bounceDamping = 1f;
-    public float _yMin, _yMax;
-    public float _targetDirection;
-    public float _currentVelocity;
-    public Rigidbody _rb;
-    public Transform upBound, downBound;
-    public bool _moving;
+    public event Action OnReflect;
 
+    [SerializeField] private float _smoothTime = 0.08f;
+    [SerializeField] private float _maxSpeed = 25f;
+    [SerializeField] private float _yMin = -2.81f;
+    [SerializeField] private float _yMax = 2.81f;
     [SerializeField] private List<Reflector> _reflectors;
     [SerializeField] private Transform _model;
     [SerializeField] private AudioClip _hitSound;
 
+    private Rigidbody _rb;
+    private float _targetY;
+    private float _currentVelocity;
+    private bool _moving;
     private bool _isInit;
     private Sequence _hitAnimation;
 
-    public float Speed => _speed;
+    public float SmoothTime => _smoothTime;
+    public float MaxSpeed => _maxSpeed;
+    public float TargetY => _targetY;
 
     private void FixedUpdate()
     {
@@ -35,7 +36,8 @@ public class Paddle : MonoBehaviour, IMovable
 
     private void OnDestroy()
     {
-        if (_isInit == false) return;
+        if (_isInit == false)
+            return;
 
         GameManager.OnSetControls -= GameManager_OnSetControls;
 
@@ -51,8 +53,8 @@ public class Paddle : MonoBehaviour, IMovable
     public void Init(Team team, bool isBot)
     {
         _rb = GetComponent<Rigidbody>();
+        _targetY = transform.position.y;
         _currentVelocity = 0f;
-        _targetDirection = 0f;
 
         foreach (var reflector in _reflectors)
             reflector.OnReflect += OnHit;
@@ -69,41 +71,40 @@ public class Paddle : MonoBehaviour, IMovable
         _isInit = true;
     }
 
+    public void SetTargetY(float targetY)
+    {
+        _targetY = Mathf.Clamp(targetY, _yMin, _yMax);
+    }
+
     public void SetDirection(float direction)
-        => _targetDirection = Mathf.Clamp(direction, -1f, 1f);
+    {
+        float currentY = _rb != null ? _rb.position.y : transform.position.y;
+        SetTargetY(currentY + direction);
+    }
 
     public void OnHit()
     {
         _hitAnimation?.Restart();
+        OnReflect?.Invoke();
     }
 
     private void GameManager_OnSetControls(bool enable)
-        => _moving = enable;
+    {
+        _moving = enable;
+        if (enable)
+        {
+            _targetY = transform.position.y;
+            _currentVelocity = 0f;
+        }
+    }
 
     private void TryMove()
     {
-        if (_moving)
-        {
-            _currentVelocity += _targetDirection * _acceleration * Time.fixedDeltaTime;
-            _currentVelocity = Mathf.Clamp(_currentVelocity, -_speed, _speed);
-        }
-        else
-        {
-            if (Mathf.Abs(_currentVelocity) > 0.01f)
-            {
-                _currentVelocity -= Mathf.Sign(_currentVelocity) * _deceleration * Time.fixedDeltaTime;
+        if (_moving == false)
+            return;
 
-                if (Mathf.Abs(_currentVelocity) < 0.01f)
-                    _currentVelocity = 0f;
-            }
-        }
-
-        _rb.position += Vector3.up * _currentVelocity * Time.fixedDeltaTime;
-
-        if (_rb.position.y > _yMax || _rb.position.y < _yMin)
-        {
-            _rb.position = new Vector3(_rb.position.x, Mathf.Clamp(_rb.position.y, _yMin, _yMax), 0);
-            _currentVelocity *= -_bounceDamping;
-        }
+        float newY = Mathf.SmoothDamp(_rb.position.y, _targetY, ref _currentVelocity, _smoothTime, _maxSpeed, Time.fixedDeltaTime);
+        newY = Mathf.Clamp(newY, _yMin, _yMax);
+        _rb.position = new Vector3(_rb.position.x, newY, _rb.position.z);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using YG;
 
@@ -20,8 +21,9 @@ public class Bootstrap : MonoBehaviour
         YG2.onGetSDKData += ApplySettingsFromSaves;
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
+        yield return null;
         YG2.GameReadyAPI();
     }
 

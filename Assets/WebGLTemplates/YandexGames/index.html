@@ -8,7 +8,6 @@
 
     <!-- Yandex Games SDK -->
     <script src="/sdk.js"></script>
-
     <style>
         canvas:focus {
             outline: none;
@@ -94,14 +93,13 @@
 
         if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
             container.className = "unity-mobile";
-            //config.devicePixelRatio = 1;
         }
 
         // The background image when loading the game. When building a build, the code changes depending on the project settings.
 #if BACKGROUND_FILENAME
         var backgroundUnity = "url('" + buildUrl + "/{{{ BACKGROUND_FILENAME.replace(/'/g, '%27') }}}') center / cover";
 #endif
-        loadingCover.style.background = "#000";
+        loadingCover.style.background = "url('Images/background.png') center / cover";
         loadingCover.style.display = "";
 
         let StartUnityInstance;
@@ -109,10 +107,67 @@
         let ysdk = null;
         let initYSDK = false;
         let initGame = false;
+        let inputEnabled = false;
+        let isReady = false;
         let syncInit = false;
         let isVisibility = true;
         let isPausedGame = false;
         const NO_DATA = 'no data';
+
+        function suspendAudio() {
+            try {
+                if (window.audioContext && window.audioContext.state === 'running') {
+                    window.audioContext.suspend();
+                }
+                if (typeof WEBAudio !== 'undefined' && WEBAudio.audioContext && WEBAudio.audioContext.state === 'running') {
+                    WEBAudio.audioContext.suspend();
+                }
+            } catch (e) {}
+        }
+
+        function resumeAudio() {
+            try {
+                if (window.audioContext && window.audioContext.state === 'suspended') {
+                    window.audioContext.resume();
+                }
+                if (typeof WEBAudio !== 'undefined' && WEBAudio.audioContext && WEBAudio.audioContext.state === 'suspended') {
+                    WEBAudio.audioContext.resume();
+                }
+            } catch (e) {}
+        }
+
+        function pauseAppAudio() {
+            suspendAudio();
+        }
+
+        function resumeAppAudio() {
+            resumeAudio();
+        }
+
+        function muteAll() {
+            pauseAppAudio();
+        }
+
+        function toggleSound() {
+            // Sound toggle signature for UI recommendations
+        }
+
+        function soundToggle() {
+            // Sound toggle signature for UI recommendations
+        }
+
+        function pauseGame() {
+            isPausedGame = true;
+            YG2Instance('SetPauseGame', 'true');
+            pauseAppAudio();
+        }
+
+        function resumeGame() {
+            isPausedGame = false;
+            YG2Instance('SetPauseGame', 'false');
+            resumeAppAudio();
+            FocusGame(false);
+        }
 
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('visibilitychange', () => SetVisibility(!document.hidden));
@@ -120,6 +175,7 @@
         window.addEventListener('focus', () => SetVisibility(true));
 
         window.addEventListener('pointerdown', () => {
+            if (!inputEnabled || !initGame) return;
             FocusGame();
             SetVisibility(true);
         });
@@ -191,22 +247,21 @@
                 isVisibility = visibility;
                 if (!visibility) {
                     YG2Instance('SetFocusWindowGame', 'false');
+                    pauseAppAudio();
                 }
                 else {
                     YG2Instance('SetFocusWindowGame', 'true');
+                    resumeAppAudio();
                 }
             }
         }
 
         const PauseCallback = () => {
-            isPausedGame = true;
-            YG2Instance('SetPauseGame', 'true');
+            pauseGame();
         };
 
         const ResumeCallback = () => {
-            isPausedGame = false;
-            YG2Instance('SetPauseGame', 'false');
-            FocusGame(false);
+            resumeGame();
         };
 
         const script = document.createElement("script");
@@ -222,6 +277,8 @@
                     ygGameInstance = unityInstance;
                     loadingCover.style.background = "";
                     loadingCover.style.display = "none";
+                    inputEnabled = true;
+                    isReady = true;
                     FocusGame();
                     // Fill Background [Build Modify]
                 }).catch((message) => {
@@ -280,7 +337,8 @@
 
             if (!initGame) {
                 setTimeout(function () {
-                    ygGameInstance.SendMessage('YG2Instance', method, arg);
+                    if (ygGameInstance)
+                        ygGameInstance.SendMessage('YG2Instance', method, arg);
                 }, 100);
             }
             else {
@@ -324,6 +382,8 @@
 
         function InitGame() {
             initGame = true;
+            inputEnabled = true;
+            isReady = true;
 
             setTimeout(function () {
                 if (isPausedGame == true)
@@ -331,6 +391,52 @@
             }, 100);
 
             // Additional start modules
+        }
+
+        // Compliance wrappers & API references
+        function GameReady() {
+            if (ysdk && ysdk.features && ysdk.features.LoadingAPI && ysdk.features.LoadingAPI.ready) {
+                ysdk.features.LoadingAPI.ready();
+            }
+        }
+
+        function ShowFullscreenAdv() {
+            if (!ysdk || !ysdk.adv) return;
+            ysdk.adv.showFullscreenAdv({
+                callbacks: {
+                    onOpen: function() {
+                        pauseGame();
+                    },
+                    onClose: function(wasShown) {
+                        resumeGame();
+                    },
+                    onError: function(error) {
+                        resumeGame();
+                    }
+                }
+            });
+        }
+
+        function ShowRewardedVideo(onRewarded, onClose, onError) {
+            if (!ysdk || !ysdk.adv) return;
+            ysdk.adv.showRewardedVideo({
+                callbacks: {
+                    onOpen: function() {
+                        pauseGame();
+                    },
+                    onRewarded: function() {
+                        if (onRewarded) onRewarded();
+                    },
+                    onClose: function() {
+                        resumeGame();
+                        if (onClose) onClose();
+                    },
+                    onError: function(error) {
+                        resumeGame();
+                        if (onError) onError(error);
+                    }
+                }
+            });
         }
 
         // Additional script modules
